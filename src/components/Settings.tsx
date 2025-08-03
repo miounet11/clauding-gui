@@ -31,7 +31,8 @@ import { HooksEditor } from "./HooksEditor";
 import { SlashCommandsManager } from "./SlashCommandsManager";
 import { ProxySettings } from "./ProxySettings";
 import { AnalyticsConsent } from "./AnalyticsConsent";
-import { useTheme, useTrackEvent } from "@/hooks";
+import { LanguageSelector } from "./LanguageSelector";
+import { useTheme, useTrackEvent, useI18n } from "@/hooks";
 import { analytics } from "@/lib/analytics";
 
 interface SettingsProps {
@@ -64,6 +65,7 @@ export const Settings: React.FC<SettingsProps> = ({
   onBack,
   className,
 }) => {
+  const { t } = useI18n(['settings', 'common']);
   const [settings, setSettings] = useState<ClaudeSettings | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -347,9 +349,9 @@ export const Settings: React.FC<SettingsProps> = ({
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <div>
-          <h2 className="text-lg font-semibold">Settings</h2>
+          <h2 className="text-lg font-semibold">{t('settings:title')}</h2>
           <p className="text-xs text-muted-foreground">
-              Configure Claude Code preferences
+              {t('settings:subtitle', 'Configure Claude Code preferences')}
           </p>
           </div>
         </div>
@@ -363,12 +365,12 @@ export const Settings: React.FC<SettingsProps> = ({
           {saving ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin" />
-              Saving...
+              {t('common:status.processing')}
             </>
           ) : (
             <>
               <Save className="h-4 w-4" />
-              Save Settings
+              {t('settings:buttons.save')}
             </>
           )}
         </Button>
@@ -398,27 +400,27 @@ export const Settings: React.FC<SettingsProps> = ({
         <div className="flex-1 overflow-y-auto p-4">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid grid-cols-9 w-full">
-              <TabsTrigger value="general">General</TabsTrigger>
-              <TabsTrigger value="permissions">Permissions</TabsTrigger>
-              <TabsTrigger value="environment">Environment</TabsTrigger>
-              <TabsTrigger value="advanced">Advanced</TabsTrigger>
-              <TabsTrigger value="hooks">Hooks</TabsTrigger>
-              <TabsTrigger value="commands">Commands</TabsTrigger>
-              <TabsTrigger value="storage">Storage</TabsTrigger>
-              <TabsTrigger value="proxy">Proxy</TabsTrigger>
-              <TabsTrigger value="analytics">Analytics</TabsTrigger>
+              <TabsTrigger value="general">{t('settings:tabs.general')}</TabsTrigger>
+              <TabsTrigger value="permissions">{t('settings:tabs.permissions')}</TabsTrigger>
+              <TabsTrigger value="environment">{t('settings:tabs.environment', 'Environment')}</TabsTrigger>
+              <TabsTrigger value="advanced">{t('settings:tabs.advanced', 'Advanced')}</TabsTrigger>
+              <TabsTrigger value="hooks">{t('settings:tabs.hooks')}</TabsTrigger>
+              <TabsTrigger value="commands">{t('settings:tabs.slash')}</TabsTrigger>
+              <TabsTrigger value="storage">{t('settings:tabs.storage')}</TabsTrigger>
+              <TabsTrigger value="proxy">{t('settings:tabs.proxy')}</TabsTrigger>
+              <TabsTrigger value="analytics">{t('settings:tabs.analytics')}</TabsTrigger>
             </TabsList>
             
             {/* General Settings */}
             <TabsContent value="general" className="space-y-6">
               <Card className="p-6 space-y-6">
                 <div>
-                  <h3 className="text-base font-semibold mb-4">General Settings</h3>
+                  <h3 className="text-base font-semibold mb-4">{t('settings:tabs.general')}</h3>
                   
                   <div className="space-y-4">
                     {/* Theme Selector */}
                     <div className="space-y-2">
-                      <Label htmlFor="theme">Theme</Label>
+                      <Label htmlFor="theme">{t('settings:general.theme')}</Label>
                       <Select
                         value={theme}
                         onValueChange={(value) => setTheme(value as any)}
@@ -427,10 +429,10 @@ export const Settings: React.FC<SettingsProps> = ({
                           <SelectValue placeholder="Select a theme" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="dark">Dark</SelectItem>
-                          <SelectItem value="gray">Gray</SelectItem>
-                          <SelectItem value="light">Light</SelectItem>
-                          <SelectItem value="custom">Custom</SelectItem>
+                          <SelectItem value="dark">{t('settings:general.darkMode')}</SelectItem>
+                          <SelectItem value="gray">{t('settings:general.grayMode', 'Gray')}</SelectItem>
+                          <SelectItem value="light">{t('settings:general.lightMode')}</SelectItem>
+                          <SelectItem value="custom">{t('settings:general.customMode', 'Custom')}</SelectItem>
                         </SelectContent>
                       </Select>
                       <p className="text-xs text-muted-foreground">
@@ -564,6 +566,15 @@ export const Settings: React.FC<SettingsProps> = ({
                         </p>
                       </div>
                     )}
+                    
+                    {/* Language Selection */}
+                    <div className="space-y-2">
+                      <Label>Language</Label>
+                      <LanguageSelector className="w-full max-w-xs" showFlag={true} />
+                      <p className="text-xs text-muted-foreground">
+                        Choose your preferred language for the interface
+                      </p>
+                    </div>
                     
                     {/* Include Co-authored By */}
                     <div className="flex items-center justify-between">

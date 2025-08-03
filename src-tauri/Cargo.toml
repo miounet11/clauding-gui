@@ -1,19 +1,19 @@
 [package]
-name = "claudia"
+name = "clauding-gui"
 version = "0.1.0"
-description = "GUI app and Toolkit for Claude Code"
-authors = ["mufeedvh", "123vviekr"]
+description = "多语言 GUI 界面 for Claude Code"
+authors = ["miounet11 <9248293@qq.com>"]
 license = "AGPL-3.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [[bin]]
-name = "claudia"
+name = "clauding-gui"
 path = "src/main.rs"
 
 [lib]
-name = "claudia_lib"
+name = "clauding_gui_lib"
 crate-type = ["lib", "cdylib", "staticlib"]
 
 [build-dependencies]

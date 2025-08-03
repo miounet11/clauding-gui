@@ -1,0 +1,46 @@
+{
+  "title": "会话",
+  "newSession": "新建会话",
+  "sessionList": "会话列表",
+  "activeSession": "活动会话",
+  "recentSessions": "最近会话",
+  "allSessions": "所有会话",
+  "sessionDetails": {
+    "name": "会话名称",
+    "project": "项目",
+    "createdAt": "创建时间",
+    "lastActive": "最后活动",
+    "duration": "持续时间",
+    "messages": "消息数",
+    "status": "状态"
+  },
+  "actions": {
+    "start": "开始会话",
+    "stop": "停止会话",
+    "pause": "暂停会话",
+    "resume": "恢复会话",
+    "delete": "删除会话",
+    "duplicate": "复制会话",
+    "export": "导出会话",
+    "rename": "重命名"
+  },
+  "filters": {
+    "all": "全部",
+    "active": "活动中",
+    "completed": "已完成",
+    "paused": "已暂停"
+  },
+  "messages": {
+    "noSessions": "暂无会话",
+    "createFirst": "创建您的第一个会话",
+    "deleteConfirm": "确定要删除此会话吗？",
+    "deleteSuccess": "会话已删除",
+    "startSuccess": "会话已启动",
+    "stopSuccess": "会话已停止"
+  },
+  "session_count_one": "{{count}} 个会话",
+  "session_count_other": "{{count}} 个会话",
+  "messages_count": "{{count}} 条消息",
+  "first_message": "首条消息",
+  "has_todo": "包含待办事项"
+}

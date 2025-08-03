@@ -27,6 +27,7 @@ import { AgentsModal } from "@/components/AgentsModal";
 import { useTabState } from "@/hooks/useTabState";
 import { AnalyticsConsentBanner } from "@/components/AnalyticsConsent";
 import { useAppLifecycle, useTrackEvent } from "@/hooks";
+import { useI18nStore } from "@/stores/i18nStore";
 
 type View = 
   | "welcome" 
@@ -66,6 +67,13 @@ function AppContent() {
   // Initialize analytics lifecycle tracking
   useAppLifecycle();
   const trackEvent = useTrackEvent();
+  
+  // Initialize i18n
+  const initializeLanguage = useI18nStore(state => state.initializeLanguage);
+  
+  useEffect(() => {
+    initializeLanguage();
+  }, [initializeLanguage]);
   
   // Track user journey milestones
   const [hasTrackedFirstChat] = useState(false);

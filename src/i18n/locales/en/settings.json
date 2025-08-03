@@ -1,0 +1,58 @@
+{
+  "title": "Settings",
+  "subtitle": "Configure Claude Code preferences",
+  "tabs": {
+    "general": "General",
+    "paths": "Paths",
+    "models": "Models",
+    "permissions": "Permissions",
+    "storage": "Storage",
+    "hooks": "Hooks",
+    "slash": "Slash Commands",
+    "proxy": "Proxy",
+    "analytics": "Analytics",
+    "environment": "Environment",
+    "advanced": "Advanced"
+  },
+  "general": {
+    "language": "Language",
+    "theme": "Theme",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "systemTheme": "System Theme",
+    "autoSave": "Auto Save",
+    "notifications": "Notifications",
+    "enableNotifications": "Enable Notifications",
+    "soundEffects": "Sound Effects",
+    "enableSoundEffects": "Enable Sound Effects",
+    "grayMode": "Gray",
+    "customMode": "Custom"
+  },
+  "paths": {
+    "claudeInstallation": "Claude Installation Path",
+    "detectAutomatically": "Detect Automatically",
+    "selectManually": "Select Manually",
+    "noInstallationFound": "No Claude installation found",
+    "detectedVersion": "Detected Version"
+  },
+  "permissions": {
+    "title": "Permission Settings",
+    "description": "Configure permission rules for Claude agents",
+    "allowedPaths": "Allowed Paths",
+    "blockedPaths": "Blocked Paths",
+    "addRule": "Add Rule",
+    "removeRule": "Remove Rule",
+    "rulePlaceholder": "Enter path pattern"
+  },
+  "buttons": {
+    "save": "Save Settings",
+    "reset": "Reset",
+    "apply": "Apply"
+  },
+  "messages": {
+    "saveSuccess": "Settings saved successfully",
+    "saveFailed": "Failed to save settings",
+    "resetConfirm": "Are you sure you want to reset all settings?",
+    "resetSuccess": "Settings reset successfully"
+  }
+}

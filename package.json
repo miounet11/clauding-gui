@@ -1,8 +1,16 @@
 {
-  "name": "claudia",
+  "name": "clauding-gui",
   "private": true,
   "version": "0.1.0",
   "license": "AGPL-3.0",
+  "author": {
+    "name": "miounet11",
+    "email": "9248293@qq.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miounet11/clauding-gui"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -41,9 +49,12 @@
     "diff": "^8.0.2",
     "framer-motion": "^12.0.0-alpha.1",
     "html2canvas": "^1.4.1",
+    "i18next": "^23.7.18",
+    "i18next-browser-languagedetector": "^7.2.0",
     "lucide-react": "^0.468.0",
     "posthog-js": "^1.258.3",
     "react": "^18.3.1",
+    "react-i18next": "^14.0.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.2",
     "react-markdown": "^9.0.3",
@@ -60,6 +71,7 @@
     "@types/node": "^22.15.30",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
+    "@types/react-i18next": "^8.1.0",
     "@types/sharp": "^0.32.0",
     "@vitejs/plugin-react": "^4.3.4",
     "sharp": "^0.34.2",

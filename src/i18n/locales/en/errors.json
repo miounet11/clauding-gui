@@ -1,0 +1,42 @@
+{
+  "general": {
+    "unknown": "Unknown error",
+    "networkError": "Network connection error",
+    "serverError": "Server error",
+    "clientError": "Client error",
+    "timeout": "Request timeout",
+    "unauthorized": "Unauthorized",
+    "forbidden": "Forbidden",
+    "notFound": "Not found",
+    "validationError": "Validation error"
+  },
+  "session": {
+    "startFailed": "Failed to start session",
+    "stopFailed": "Failed to stop session",
+    "notFound": "Session not found",
+    "alreadyActive": "Session is already running",
+    "invalidState": "Invalid session state"
+  },
+  "agent": {
+    "createFailed": "Failed to create agent",
+    "updateFailed": "Failed to update agent",
+    "deleteFailed": "Failed to delete agent",
+    "runFailed": "Failed to run agent",
+    "notFound": "Agent not found",
+    "invalidPrompt": "Invalid system prompt"
+  },
+  "file": {
+    "readFailed": "Failed to read file",
+    "writeFailed": "Failed to write file",
+    "deleteFailed": "Failed to delete file",
+    "notFound": "File not found",
+    "tooLarge": "File too large",
+    "invalidFormat": "Invalid file format"
+  },
+  "api": {
+    "keyMissing": "API key missing",
+    "keyInvalid": "Invalid API key",
+    "quotaExceeded": "Quota exceeded",
+    "rateLimited": "Rate limited"
+  }
+}

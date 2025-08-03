@@ -1,0 +1,46 @@
+{
+  "title": "Sessions",
+  "newSession": "New Session",
+  "sessionList": "Session List",
+  "activeSession": "Active Session",
+  "recentSessions": "Recent Sessions",
+  "allSessions": "All Sessions",
+  "sessionDetails": {
+    "name": "Session Name",
+    "project": "Project",
+    "createdAt": "Created At",
+    "lastActive": "Last Active",
+    "duration": "Duration",
+    "messages": "Messages",
+    "status": "Status"
+  },
+  "actions": {
+    "start": "Start Session",
+    "stop": "Stop Session",
+    "pause": "Pause Session",
+    "resume": "Resume Session",
+    "delete": "Delete Session",
+    "duplicate": "Duplicate Session",
+    "export": "Export Session",
+    "rename": "Rename"
+  },
+  "filters": {
+    "all": "All",
+    "active": "Active",
+    "completed": "Completed",
+    "paused": "Paused"
+  },
+  "messages": {
+    "noSessions": "No sessions found",
+    "createFirst": "Create your first session",
+    "deleteConfirm": "Are you sure you want to delete this session?",
+    "deleteSuccess": "Session deleted successfully",
+    "startSuccess": "Session started successfully",
+    "stopSuccess": "Session stopped successfully"
+  },
+  "session_count_one": "{{count}} session",
+  "session_count_other": "{{count}} sessions",
+  "messages_count": "{{count}} messages",
+  "first_message": "First message",
+  "has_todo": "Has todos"
+}

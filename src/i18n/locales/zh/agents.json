@@ -1,0 +1,47 @@
+{
+  "title": "代理",
+  "newAgent": "新建代理",
+  "agentList": "代理列表",
+  "customAgents": "自定义代理",
+  "systemAgents": "系统代理",
+  "agentDetails": {
+    "name": "代理名称",
+    "description": "描述",
+    "systemPrompt": "系统提示词",
+    "icon": "图标",
+    "color": "颜色",
+    "createdAt": "创建时间",
+    "lastUsed": "最后使用",
+    "usageCount": "使用次数"
+  },
+  "actions": {
+    "create": "创建代理",
+    "edit": "编辑代理",
+    "delete": "删除代理",
+    "duplicate": "复制代理",
+    "export": "导出代理",
+    "import": "导入代理",
+    "run": "运行代理",
+    "test": "测试代理"
+  },
+  "form": {
+    "nameLabel": "代理名称",
+    "namePlaceholder": "输入代理名称",
+    "descriptionLabel": "描述",
+    "descriptionPlaceholder": "描述此代理的功能",
+    "promptLabel": "系统提示词",
+    "promptPlaceholder": "输入系统提示词...",
+    "iconLabel": "选择图标",
+    "colorLabel": "选择颜色"
+  },
+  "messages": {
+    "noAgents": "暂无代理",
+    "createFirst": "创建您的第一个代理",
+    "deleteConfirm": "确定要删除此代理吗？",
+    "deleteSuccess": "代理已删除",
+    "createSuccess": "代理创建成功",
+    "updateSuccess": "代理更新成功",
+    "runSuccess": "代理运行成功",
+    "runFailed": "代理运行失败"
+  }
+}

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence, Reorder } from 'framer-motion';
 import { X, Plus, MessageSquare, Bot, AlertCircle, Loader2, Folder, BarChart, Server, Settings, FileText } from 'lucide-react';
 import { useTabState } from '@/hooks/useTabState';
@@ -16,6 +17,7 @@ interface TabItemProps {
 }
 
 const TabItem: React.FC<TabItemProps> = ({ tab, isActive, onClose, onClick, isDragging = false, setDraggedTabId }) => {
+  const { t } = useTranslation('common');
   const [isHovered, setIsHovered] = useState(false);
   
   const getIcon = () => {
@@ -120,7 +122,7 @@ const TabItem: React.FC<TabItemProps> = ({ tab, isActive, onClose, onClick, isDr
           "focus:outline-none focus:ring-1 focus:ring-destructive/50",
           (isHovered || isActive) ? "opacity-100" : "opacity-0"
         )}
-        title={`Close ${tab.title}`}
+        title={t('tab.close', { title: tab.title })}
         tabIndex={-1}
       >
         <X className="w-3 h-3" />

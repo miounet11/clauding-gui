@@ -1,0 +1,47 @@
+{
+  "title": "Agents",
+  "newAgent": "New Agent",
+  "agentList": "Agent List",
+  "customAgents": "Custom Agents",
+  "systemAgents": "System Agents",
+  "agentDetails": {
+    "name": "Agent Name",
+    "description": "Description",
+    "systemPrompt": "System Prompt",
+    "icon": "Icon",
+    "color": "Color",
+    "createdAt": "Created At",
+    "lastUsed": "Last Used",
+    "usageCount": "Usage Count"
+  },
+  "actions": {
+    "create": "Create Agent",
+    "edit": "Edit Agent",
+    "delete": "Delete Agent",
+    "duplicate": "Duplicate Agent",
+    "export": "Export Agent",
+    "import": "Import Agent",
+    "run": "Run Agent",
+    "test": "Test Agent"
+  },
+  "form": {
+    "nameLabel": "Agent Name",
+    "namePlaceholder": "Enter agent name",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Describe what this agent does",
+    "promptLabel": "System Prompt",
+    "promptPlaceholder": "Enter system prompt...",
+    "iconLabel": "Select Icon",
+    "colorLabel": "Select Color"
+  },
+  "messages": {
+    "noAgents": "No agents found",
+    "createFirst": "Create your first agent",
+    "deleteConfirm": "Are you sure you want to delete this agent?",
+    "deleteSuccess": "Agent deleted successfully",
+    "createSuccess": "Agent created successfully",
+    "updateSuccess": "Agent updated successfully",
+    "runSuccess": "Agent ran successfully",
+    "runFailed": "Agent failed to run"
+  }
+}

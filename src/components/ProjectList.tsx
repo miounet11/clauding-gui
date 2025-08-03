@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { 
   FolderOpen, 
@@ -70,6 +71,7 @@ export const ProjectList: React.FC<ProjectListProps> = ({
   onProjectSettings,
   className,
 }) => {
+  const { t } = useTranslation('projects');
   const [currentPage, setCurrentPage] = useState(1);
   
   // Calculate pagination
@@ -150,7 +152,7 @@ export const ProjectList: React.FC<ProjectListProps> = ({
                             }}
                           >
                             <Settings className="h-4 w-4 mr-2" />
-                            Hooks
+                            {t('project_hooks')}
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>

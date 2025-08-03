@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { FileText, ArrowLeft, Calendar, Clock, MessageSquare } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,6 +9,7 @@ import { ClaudeMemoriesDropdown } from "@/components/ClaudeMemoriesDropdown";
 import { cn } from "@/lib/utils";
 import { formatUnixTimestamp, formatISOTimestamp, truncateText, getFirstLine } from "@/lib/date-utils";
 import type { Session, ClaudeMdFile } from "@/lib/api";
+import { useI18n } from "@/hooks";
 
 interface SessionListProps {
   /**
@@ -57,6 +59,7 @@ export const SessionList: React.FC<SessionListProps> = ({
   onEditClaudeFile,
   className,
 }) => {
+  const { t } = useI18n('sessions');
   const [currentPage, setCurrentPage] = useState(1);
   
   // Calculate pagination
@@ -89,7 +92,7 @@ export const SessionList: React.FC<SessionListProps> = ({
         <div className="flex-1 min-w-0">
           <h2 className="text-base font-medium truncate">{projectPath}</h2>
           <p className="text-xs text-muted-foreground">
-            {sessions.length} session{sessions.length !== 1 ? 's' : ''}
+            {t('session_count', { count: sessions.length })}
           </p>
         </div>
       </motion.div>
@@ -149,7 +152,7 @@ export const SessionList: React.FC<SessionListProps> = ({
                             <div className="space-y-1">
                               <div className="flex items-center space-x-1 text-xs text-muted-foreground">
                                 <MessageSquare className="h-3 w-3" />
-                                <span>First message:</span>
+                                <span>{t('first_message')}</span>
                               </div>
                               <p className="text-xs line-clamp-2 text-foreground/80">
                                 {truncateText(getFirstLine(session.first_message), 100)}
@@ -173,7 +176,7 @@ export const SessionList: React.FC<SessionListProps> = ({
                             {session.todo_data && (
                               <div className="flex items-center space-x-1">
                                 <Calendar className="h-3 w-3" />
-                                <span>Has todo</span>
+                                <span>{t('has_todo')}</span>
                               </div>
                             )}
                           </div>
