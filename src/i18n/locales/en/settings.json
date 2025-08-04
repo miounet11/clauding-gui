@@ -15,6 +15,34 @@
     "advanced": "Advanced"
   },
   "general": {
+    "selectTheme": "Select a theme",
+    "themeDescription": "Choose your preferred color theme for the interface",
+    "customThemeColors": "Custom Theme Colors",
+    "useColorValues": "Use CSS color values (hex, rgb, oklch, etc.). Changes apply immediately.",
+    "backgroundColorLabel": "Background",
+    "foregroundColorLabel": "Foreground",
+    "primaryColorLabel": "Primary",
+    "cardColorLabel": "Card",
+    "accentColorLabel": "Accent",
+    "destructiveColorLabel": "Destructive",
+    "verboseOutput": "Verbose Output",
+    "verboseOutputDescription": "Show full bash and command outputs",
+    "enableAnalytics": "Enable Analytics",
+    "analyticsDescription": "Help improve Claudia by sharing anonymous usage data",
+    "privacyTitle": "Your privacy is protected",
+    "privacyDetails": {
+      "noPersonalInfo": "No personal information is collected",
+      "noFileContents": "No file contents, paths, or project names",
+      "anonymousData": "All data is anonymous with random IDs",
+      "canDisable": "You can disable analytics at any time"
+    },
+    "dataCollected": {
+      "featureUsage": "Feature usage patterns",
+      "performance": "Performance metrics",
+      "errorReports": "Error reports (without sensitive data)",
+      "sessionInfo": "Session frequency and duration"
+    },
+    "deleteAnalyticsData": "Delete All Analytics Data",
     "language": "Language",
     "theme": "Theme",
     "darkMode": "Dark Mode",

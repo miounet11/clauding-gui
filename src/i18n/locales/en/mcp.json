@@ -1,0 +1,76 @@
+{
+  "title": "MCP Servers",
+  "subtitle": "Manage Model Context Protocol servers",
+  "header": {
+    "title": "MCP Servers",
+    "subtitle": "Manage Model Context Protocol servers"
+  },
+  "tabs": {
+    "servers": "Servers",
+    "addServer": "Add Server",
+    "importExport": "Import/Export"
+  },
+  "errors": {
+    "loadFailed": "Failed to load MCP servers. Make sure Claude Code is installed."
+  },
+  "messages": {
+    "serverAdded": "MCP server added successfully!",
+    "serverRemoved": "Server \"{{name}}\" removed successfully!",
+    "importSuccess": "Successfully imported {{imported}} server!",
+    "importSuccessPlural": "Successfully imported {{imported}} servers!",
+    "importPartial": "Imported {{imported}} server{{importedPlural}}, {{failed}} failed"
+  },
+  "serverList": {
+    "title": "Configured Servers",
+    "noServers": "No MCP servers configured yet",
+    "addFirst": "Add your first MCP server to get started",
+    "columns": {
+      "name": "Name",
+      "type": "Type",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "connected": "Connected",
+      "disconnected": "Disconnected",
+      "error": "Error"
+    },
+    "actions": {
+      "remove": "Remove",
+      "configure": "Configure",
+      "test": "Test Connection"
+    }
+  },
+  "addServer": {
+    "title": "Add New Server",
+    "description": "Configure a new MCP server",
+    "fields": {
+      "name": "Server Name",
+      "namePlaceholder": "Enter server name",
+      "command": "Command",
+      "commandPlaceholder": "e.g., npx @modelcontextprotocol/server-name",
+      "args": "Arguments",
+      "argsPlaceholder": "Command arguments (optional)",
+      "env": "Environment Variables",
+      "envPlaceholder": "KEY=value (one per line)"
+    },
+    "buttons": {
+      "add": "Add Server",
+      "cancel": "Cancel"
+    }
+  },
+  "importExport": {
+    "title": "Import/Export Configuration",
+    "export": {
+      "title": "Export Configuration",
+      "description": "Export your current MCP server configuration",
+      "button": "Export Configuration"
+    },
+    "import": {
+      "title": "Import Configuration",
+      "description": "Import MCP server configuration from a file",
+      "button": "Select File",
+      "dragDrop": "or drag and drop file here"
+    }
+  }
+}

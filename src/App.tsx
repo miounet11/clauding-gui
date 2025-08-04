@@ -26,7 +26,7 @@ import { TabContent } from "@/components/TabContent";
 import { AgentsModal } from "@/components/AgentsModal";
 import { useTabState } from "@/hooks/useTabState";
 import { AnalyticsConsentBanner } from "@/components/AnalyticsConsent";
-import { useAppLifecycle, useTrackEvent } from "@/hooks";
+import { useAppLifecycle, useTrackEvent, useI18n } from "@/hooks";
 import { useI18nStore } from "@/stores/i18nStore";
 
 type View = 
@@ -69,6 +69,7 @@ function AppContent() {
   const trackEvent = useTrackEvent();
   
   // Initialize i18n
+  const { t } = useI18n();
   const initializeLanguage = useI18nStore(state => state.initializeLanguage);
   
   useEffect(() => {
@@ -254,7 +255,7 @@ function AppContent() {
               >
                 <h1 className="text-4xl font-bold tracking-tight">
                   <span className="rotating-symbol"></span>
-                  Welcome to Claudia
+                  {t('common:welcome.title')}
                 </h1>
               </motion.div>
 

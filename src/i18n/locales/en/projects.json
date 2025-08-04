@@ -1,3 +1,25 @@
 {
-  "project_hooks": "Hooks"
+  "title": "Projects",
+  "subtitle": "Select a project to view sessions",
+  "noProjects": "No projects found",
+  "noProjectsHint": "Projects will appear here once you create them with Claude Code",
+  "viewSessions": "View Sessions",
+  "projectSettings": "Project Settings",
+  "lastActive": "Last Active",
+  "sessions": "Sessions",
+  "sessionsCount_one": "{{count}} session",
+  "sessionsCount_other": "{{count}} sessions",
+  "loading": "Loading projects...",
+  "searchPlaceholder": "Search projects...",
+  "sortBy": "Sort by",
+  "sortOptions": {
+    "name": "Name",
+    "lastActive": "Last Active",
+    "sessionsCount": "Sessions Count"
+  },
+  "actions": {
+    "openFolder": "Open Folder",
+    "settings": "Settings",
+    "refresh": "Refresh"
+  }
 }

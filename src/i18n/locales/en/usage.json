@@ -1,0 +1,93 @@
+{
+  "title": "Usage Dashboard",
+  "subtitle": "API usage and cost analytics",
+  "header": {
+    "title": "Usage Dashboard",
+    "subtitle": "Track your Claude Code usage and costs"
+  },
+  "dateRange": {
+    "allTime": "All Time",
+    "last7Days": "Last 7 Days",
+    "last30Days": "Last 30 Days"
+  },
+  "loading": "Loading usage statistics...",
+  "error": "Failed to load usage statistics. Please try again.",
+  "tryAgain": "Try Again",
+  "cards": {
+    "totalCost": "Total Cost",
+    "totalSessions": "Total Sessions",
+    "totalTokens": "Total Tokens",
+    "avgCostPerSession": "Avg Cost/Session"
+  },
+  "tabs": {
+    "overview": "Overview",
+    "models": "By Model",
+    "projects": "By Project",
+    "sessions": "By Session",
+    "timeline": "Timeline"
+  },
+  "overview": {
+    "tokenBreakdown": "Token Breakdown",
+    "inputTokens": "Input Tokens",
+    "outputTokens": "Output Tokens",
+    "cacheWrite": "Cache Write",
+    "cacheRead": "Cache Read",
+    "mostUsedModels": "Most Used Models",
+    "topProjects": "Top Projects",
+    "sessions": "sessions"
+  },
+  "models": {
+    "title": "Usage by Model",
+    "input": "Input:",
+    "output": "Output:",
+    "cacheW": "Cache W:",
+    "cacheR": "Cache R:"
+  },
+  "projects": {
+    "title": "Usage by Project",
+    "perSession": "/session"
+  },
+  "sessions": {
+    "title": "Usage by Session"
+  },
+  "timeline": {
+    "title": "Daily Usage",
+    "dailyUsage": "Daily Usage Over Time",
+    "cost": "Cost:",
+    "models": "model",
+    "noData": "No usage data available for the selected period"
+  },
+  "metrics": {
+    "totalCost": "Total Cost",
+    "totalTokens": "Total Tokens",
+    "apiCalls": "API Calls",
+    "inputTokens": "Input Tokens",
+    "outputTokens": "Output Tokens",
+    "cacheReads": "Cache Reads",
+    "cacheWrites": "Cache Writes"
+  },
+  "timeRange": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "last7Days": "Last 7 Days",
+    "last30Days": "Last 30 Days",
+    "thisMonth": "This Month",
+    "lastMonth": "Last Month",
+    "all": "All Time"
+  },
+  "models": {
+    "claude3Opus": "Claude 3 Opus",
+    "claude3Sonnet": "Claude 3 Sonnet",
+    "claude3Haiku": "Claude 3 Haiku",
+    "claude35Sonnet": "Claude 3.5 Sonnet",
+    "claude4Opus": "Opus 4",
+    "claude4Sonnet": "Sonnet 4"
+  },
+  "noData": "No usage data available",
+  "noDataHint": "Your usage will appear here once you start using Claude Code",
+  "export": "Export Data",
+  "refresh": "Refresh",
+  "cost": "Cost",
+  "tokens": "Tokens",
+  "percentage": "Percentage"
+}

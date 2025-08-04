@@ -1,3 +1,25 @@
 {
-  "project_hooks": "钩子"
+  "title": "项目",
+  "subtitle": "选择一个项目来查看会话",
+  "noProjects": "没有找到项目",
+  "noProjectsHint": "项目将在您使用 Claude Code 创建后显示在这里",
+  "viewSessions": "查看会话",
+  "projectSettings": "项目设置",
+  "lastActive": "最后活动",
+  "sessions": "会话",
+  "sessionsCount_one": "{{count}} 个会话",
+  "sessionsCount_other": "{{count}} 个会话",
+  "loading": "加载项目中...",
+  "searchPlaceholder": "搜索项目...",
+  "sortBy": "排序方式",
+  "sortOptions": {
+    "name": "名称",
+    "lastActive": "最近活动",
+    "sessionsCount": "会话数量"
+  },
+  "actions": {
+    "openFolder": "打开文件夹",
+    "settings": "设置",
+    "refresh": "刷新"
+  }
 }

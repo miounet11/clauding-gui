@@ -103,6 +103,21 @@
     "about": "关于"
   },
   "tab": {
-    "close": "关闭 {{title}}"
+    "close": "关闭 {{title}}",
+    "newChat": "新对话",
+    "projects": "项目",
+    "usage": "使用情况",
+    "settings": "设置",
+    "agents": "代理",
+    "mcp": "MCP 服务器",
+    "createAgent": "创建代理",
+    "importAgent": "导入代理"
+  },
+  "welcome": {
+    "title": "欢迎使用 Clauding GUI",
+    "startChat": "开始对话",
+    "browseProjects": "浏览项目",
+    "createAgent": "创建代理",
+    "viewUsage": "查看使用情况"
   }
 }

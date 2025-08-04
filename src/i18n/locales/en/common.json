@@ -103,6 +103,21 @@
     "about": "About"
   },
   "tab": {
-    "close": "Close {{title}}"
+    "close": "Close {{title}}",
+    "newChat": "New Chat",
+    "projects": "Projects",
+    "usage": "Usage",
+    "settings": "Settings",
+    "agents": "Agents",
+    "mcp": "MCP Servers",
+    "createAgent": "Create Agent",
+    "importAgent": "Import Agent"
+  },
+  "welcome": {
+    "title": "Welcome to Clauding GUI",
+    "startChat": "Start Chat",
+    "browseProjects": "Browse Projects",
+    "createAgent": "Create Agent",
+    "viewUsage": "View Usage"
   }
 }

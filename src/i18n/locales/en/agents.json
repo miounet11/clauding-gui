@@ -1,5 +1,56 @@
 {
-  "title": "Agents",
+  "title": "CC Agents",
+  "subtitle": "Manage your Claude Code agents",
+  "header": {
+    "title": "CC Agents",
+    "subtitle": "Manage your Claude Code agents"
+  },
+  "buttons": {
+    "createAgent": "Create CC Agent",
+    "import": "Import",
+    "execute": "Execute",
+    "edit": "Edit",
+    "export": "Export",
+    "delete": "Delete",
+    "previous": "Previous",
+    "next": "Next",
+    "cancel": "Cancel"
+  },
+  "importMenu": {
+    "fromFile": "From File",
+    "fromGitHub": "From GitHub"
+  },
+  "emptyState": {
+    "title": "No agents yet",
+    "description": "Create your first CC Agent to get started"
+  },
+  "agentCard": {
+    "created": "Created:"
+  },
+  "pagination": {
+    "pageInfo": "Page {{current}} of {{total}}"
+  },
+  "recentExecutions": {
+    "title": "Recent Executions"
+  },
+  "deleteDialog": {
+    "title": "Delete Agent",
+    "description": "Are you sure you want to delete the agent \"{{name}}\"? This action cannot be undone and will permanently remove the agent and all its associated data.",
+    "confirmButton": "Delete Agent",
+    "deleting": "Deleting..."
+  },
+  "messages": {
+    "createSuccess": "Agent created successfully",
+    "updateSuccess": "Agent updated successfully",
+    "deleteSuccess": "Agent deleted successfully",
+    "importSuccess": "Agent imported successfully",
+    "exportSuccess": "Agent \"{{name}}\" exported successfully",
+    "importFromGitHubSuccess": "Agent imported successfully from GitHub",
+    "loadFailed": "Failed to load agents",
+    "deleteFailed": "Failed to delete agent",
+    "exportFailed": "Failed to export agent",
+    "importFailed": "Failed to import agent"
+  },
   "newAgent": "New Agent",
   "agentList": "Agent List",
   "customAgents": "Custom Agents",
@@ -42,6 +93,50 @@
     "createSuccess": "Agent created successfully",
     "updateSuccess": "Agent updated successfully",
     "runSuccess": "Agent ran successfully",
-    "runFailed": "Agent failed to run"
+    "runFailed": "Agent failed to run",
+    "importSuccess": "Agent imported successfully",
+    "importFailed": "Failed to import agent",
+    "exportSuccess": "Agent exported successfully",
+    "exportFailed": "Failed to export agent"
+  },
+  "tabs": {
+    "myAgents": "My Agents",
+    "executions": "Executions",
+    "githubAgents": "GitHub Agents"
+  },
+  "github": {
+    "browse": "Browse GitHub Agents",
+    "description": "Discover and import community shared agents"
+  },
+  "noAgents": "You haven't created any agents yet",
+  "createFirstAgent": "Create your first agent to get started",
+  "runningAgent": "Running {{name}}",
+  "agentCompleted": "Agent {{name}} completed",
+  "createEdit": {
+    "editTitle": "Edit CC Agent",
+    "createTitle": "Create CC Agent",
+    "editSubtitle": "Update your Claude Code agent",
+    "createSubtitle": "Create a new Claude Code agent",
+    "saveButton": "Save",
+    "saving": "Saving...",
+    "basicInfo": "Basic Information",
+    "agentName": "Agent Name",
+    "agentNamePlaceholder": "e.g., Code Assistant",
+    "agentIcon": "Agent Icon",
+    "model": "Model",
+    "modelSonnet": "Claude 4 Sonnet",
+    "modelSonnetDesc": "Faster, efficient for most tasks",
+    "modelOpus": "Claude 4 Opus",
+    "modelOpusDesc": "More capable, better for complex tasks",
+    "defaultTask": "Default Task (Optional)",
+    "defaultTaskPlaceholder": "e.g., Review this code for security issues",
+    "defaultTaskHint": "This will be used as the default task placeholder when executing the agent",
+    "systemPrompt": "System Prompt",
+    "systemPromptHint": "Define the behavior and capabilities of your CC Agent",
+    "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?",
+    "nameRequired": "Agent name is required",
+    "promptRequired": "System prompt is required",
+    "createFailed": "Failed to create agent",
+    "updateFailed": "Failed to update agent"
   }
 }

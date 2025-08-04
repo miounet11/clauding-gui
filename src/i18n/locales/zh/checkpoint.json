@@ -1,0 +1,36 @@
+{
+  "title": "检查点设置",
+  "experimentalWarning": {
+    "title": "实验性功能",
+    "description": "检查点功能可能影响目录结构或导致数据丢失。请谨慎使用。"
+  },
+  "autoCheckpoint": {
+    "label": "自动检查点",
+    "description": "根据所选策略自动创建检查点"
+  },
+  "strategy": {
+    "label": "检查点策略",
+    "manual": "仅手动创建检查点",
+    "perPrompt": "每次用户提示后创建检查点",
+    "perToolUse": "每次工具使用后创建检查点",
+    "smart": "在破坏性操作后创建检查点"
+  },
+  "storageManagement": {
+    "title": "存储管理",
+    "totalCheckpoints": "总检查点数：",
+    "keepRecent": "保留最近的检查点",
+    "cleanupDescription": "删除旧检查点，仅保留最近的 {{count}} 个"
+  },
+  "buttons": {
+    "saveSettings": "保存设置",
+    "saving": "保存中...",
+    "cleanUp": "清理"
+  },
+  "messages": {
+    "saveSuccess": "设置保存成功",
+    "saveFailed": "保存检查点设置失败",
+    "loadFailed": "加载检查点设置失败",
+    "cleanupSuccess": "已删除 {{count}} 个旧检查点",
+    "cleanupFailed": "清理检查点失败"
+  }
+}

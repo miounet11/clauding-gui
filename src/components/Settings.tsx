@@ -426,7 +426,7 @@ export const Settings: React.FC<SettingsProps> = ({
                         onValueChange={(value) => setTheme(value as any)}
                       >
                         <SelectTrigger id="theme" className="w-full">
-                          <SelectValue placeholder="Select a theme" />
+                          <SelectValue placeholder={t('settings:general.selectTheme')} />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="dark">{t('settings:general.darkMode')}</SelectItem>
@@ -436,19 +436,19 @@ export const Settings: React.FC<SettingsProps> = ({
                         </SelectContent>
                       </Select>
                       <p className="text-xs text-muted-foreground">
-                        Choose your preferred color theme for the interface
+                        {t('settings:general.themeDescription')}
                       </p>
                     </div>
                     
                     {/* Custom Color Editor */}
                     {theme === 'custom' && (
                       <div className="space-y-4 p-4 border rounded-lg bg-muted/20">
-                        <h4 className="text-sm font-medium">Custom Theme Colors</h4>
+                        <h4 className="text-sm font-medium">{t('settings:general.customThemeColors')}</h4>
                         
                         <div className="grid grid-cols-2 gap-4">
                           {/* Background Color */}
                           <div className="space-y-2">
-                            <Label htmlFor="color-background" className="text-xs">Background</Label>
+                            <Label htmlFor="color-background" className="text-xs">{t('settings:general.backgroundColorLabel')}</Label>
                             <div className="flex gap-2">
                               <Input
                                 id="color-background"
@@ -467,7 +467,7 @@ export const Settings: React.FC<SettingsProps> = ({
                           
                           {/* Foreground Color */}
                           <div className="space-y-2">
-                            <Label htmlFor="color-foreground" className="text-xs">Foreground</Label>
+                            <Label htmlFor="color-foreground" className="text-xs">{t('settings:general.foregroundColorLabel')}</Label>
                             <div className="flex gap-2">
                               <Input
                                 id="color-foreground"
@@ -486,7 +486,7 @@ export const Settings: React.FC<SettingsProps> = ({
                           
                           {/* Primary Color */}
                           <div className="space-y-2">
-                            <Label htmlFor="color-primary" className="text-xs">Primary</Label>
+                            <Label htmlFor="color-primary" className="text-xs">{t('settings:general.primaryColorLabel')}</Label>
                             <div className="flex gap-2">
                               <Input
                                 id="color-primary"
@@ -505,7 +505,7 @@ export const Settings: React.FC<SettingsProps> = ({
                           
                           {/* Card Color */}
                           <div className="space-y-2">
-                            <Label htmlFor="color-card" className="text-xs">Card</Label>
+                            <Label htmlFor="color-card" className="text-xs">{t('settings:general.cardColorLabel')}</Label>
                             <div className="flex gap-2">
                               <Input
                                 id="color-card"
@@ -524,7 +524,7 @@ export const Settings: React.FC<SettingsProps> = ({
                           
                           {/* Accent Color */}
                           <div className="space-y-2">
-                            <Label htmlFor="color-accent" className="text-xs">Accent</Label>
+                            <Label htmlFor="color-accent" className="text-xs">{t('settings:general.accentColorLabel')}</Label>
                             <div className="flex gap-2">
                               <Input
                                 id="color-accent"
@@ -543,7 +543,7 @@ export const Settings: React.FC<SettingsProps> = ({
                           
                           {/* Destructive Color */}
                           <div className="space-y-2">
-                            <Label htmlFor="color-destructive" className="text-xs">Destructive</Label>
+                            <Label htmlFor="color-destructive" className="text-xs">{t('settings:general.destructiveColorLabel')}</Label>
                             <div className="flex gap-2">
                               <Input
                                 id="color-destructive"
@@ -562,7 +562,7 @@ export const Settings: React.FC<SettingsProps> = ({
                         </div>
                         
                         <p className="text-xs text-muted-foreground">
-                          Use CSS color values (hex, rgb, oklch, etc.). Changes apply immediately.
+                          {t('settings:general.useColorValues')}
                         </p>
                       </div>
                     )}
@@ -594,9 +594,9 @@ export const Settings: React.FC<SettingsProps> = ({
                     {/* Verbose Output */}
                     <div className="flex items-center justify-between">
                       <div className="space-y-0.5 flex-1">
-                        <Label htmlFor="verbose">Verbose Output</Label>
+                        <Label htmlFor="verbose">{t('settings:general.verboseOutput')}</Label>
                         <p className="text-xs text-muted-foreground">
-                          Show full bash and command outputs
+                          {t('settings:general.verboseOutputDescription')}
                         </p>
                       </div>
                       <Switch
@@ -946,9 +946,9 @@ export const Settings: React.FC<SettingsProps> = ({
                     {/* Analytics Toggle */}
                     <div className="flex items-center justify-between">
                       <div className="space-y-1">
-                        <Label htmlFor="analytics-enabled" className="text-base">Enable Analytics</Label>
+                        <Label htmlFor="analytics-enabled" className="text-base">{t('settings:general.enableAnalytics')}</Label>
                         <p className="text-sm text-muted-foreground">
-                          Help improve Claudia by sharing anonymous usage data
+                          {t('settings:general.analyticsDescription')}
                         </p>
                       </div>
                       <Switch
@@ -977,12 +977,12 @@ export const Settings: React.FC<SettingsProps> = ({
                       <div className="flex gap-3">
                         <Shield className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
                         <div className="space-y-2">
-                          <p className="font-medium text-blue-900 dark:text-blue-100">Your privacy is protected</p>
+                          <p className="font-medium text-blue-900 dark:text-blue-100">{t('settings:general.privacyTitle')}</p>
                           <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
-                            <li>• No personal information is collected</li>
-                            <li>• No file contents, paths, or project names</li>
-                            <li>• All data is anonymous with random IDs</li>
-                            <li>• You can disable analytics at any time</li>
+                            <li>• {t('settings:general.privacyDetails.noPersonalInfo')}</li>
+                            <li>• {t('settings:general.privacyDetails.noFileContents')}</li>
+                            <li>• {t('settings:general.privacyDetails.anonymousData')}</li>
+                            <li>• {t('settings:general.privacyDetails.canDisable')}</li>
                           </ul>
                         </div>
                       </div>
@@ -992,12 +992,12 @@ export const Settings: React.FC<SettingsProps> = ({
                     {analyticsEnabled && (
                       <div className="space-y-4">
                         <div>
-                          <h4 className="text-sm font-medium mb-2">What we collect:</h4>
+                          <h4 className="text-sm font-medium mb-2">{t('settings:general.dataCollected')}</h4>
                           <ul className="text-sm text-muted-foreground space-y-1">
-                            <li>• Feature usage patterns</li>
-                            <li>• Performance metrics</li>
-                            <li>• Error reports (without sensitive data)</li>
-                            <li>• Session frequency and duration</li>
+                            <li>• {t('settings:general.dataCollected.featureUsage')}</li>
+                            <li>• {t('settings:general.dataCollected.performance')}</li>
+                            <li>• {t('settings:general.dataCollected.errorReports')}</li>
+                            <li>• {t('settings:general.dataCollected.sessionInfo')}</li>
                           </ul>
                         </div>
                         
@@ -1010,11 +1010,11 @@ export const Settings: React.FC<SettingsProps> = ({
                               await analytics.deleteAllData();
                               setAnalyticsEnabled(false);
                               setAnalyticsConsented(false);
-                              setToast({ message: "All analytics data deleted", type: "success" });
+                              setToast({ message: t('settings:general.deleteAnalyticsData'), type: "success" });
                             }}
                           >
                             <Trash className="mr-2 h-4 w-4" />
-                            Delete All Analytics Data
+                            {t('settings:general.deleteAnalyticsData')}
                           </Button>
                         </div>
                       </div>

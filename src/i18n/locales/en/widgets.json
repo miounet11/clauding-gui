@@ -1,0 +1,59 @@
+{
+  "todo": {
+    "title": "Todo List",
+    "header": "Todo List",
+    "subtitle": "Claude will add and track tasks",
+    "empty": {
+      "title": "No todos yet",
+      "subtitle": "Claude will add tasks here"
+    },
+    "status": {
+      "pending": "Pending",
+      "inProgress": "In Progress",
+      "completed": "Completed"
+    },
+    "priority": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    }
+  },
+  "bash": {
+    "title": "Terminal Output",
+    "running": "Running...",
+    "executed": "Executed: {{time}}",
+    "description": "{{description}}",
+    "elapsedTime": "Elapsed: {{time}}ms",
+    "showOutput": "Show output",
+    "hideOutput": "Hide output",
+    "showFullOutput": "Show full output",
+    "hideFullOutput": "Hide full output",
+    "outputTruncated": "Output truncated (showing first {{limit}} characters)",
+    "copyCommand": "Copy command",
+    "copyOutput": "Copy output",
+    "outputCopied": "Output copied to clipboard"
+  },
+  "ls": {
+    "title": "File List",
+    "listed": "Listed: {{time}}",
+    "error": "Error",
+    "empty": "Directory is empty",
+    "filesAndDirs": "{{files}} files, {{dirs}} directories",
+    "files": "{{count}} files",
+    "dirs": "{{count}} directories",
+    "showHidden": "Show hidden files",
+    "hideHidden": "Hide hidden files",
+    "expandDirs": "Expand directories",
+    "collapseDirs": "Collapse directories",
+    "errorLoading": "Error loading directory contents"
+  },
+  "search": {
+    "title": "Search Results",
+    "results": "Found {{count}} results",
+    "noResults": "No results found",
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "copyPath": "Copy path",
+    "openFile": "Open file"
+  }
+}

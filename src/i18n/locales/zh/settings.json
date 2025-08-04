@@ -15,6 +15,34 @@
     "advanced": "高级"
   },
   "general": {
+    "selectTheme": "选择主题",
+    "themeDescription": "选择您偏好的界面颜色主题",
+    "customThemeColors": "自定义主题颜色",
+    "useColorValues": "使用 CSS 颜色值（hex、rgb、oklch 等）。更改立即生效。",
+    "backgroundColorLabel": "背景",
+    "foregroundColorLabel": "前景",
+    "primaryColorLabel": "主色",
+    "cardColorLabel": "卡片",
+    "accentColorLabel": "强调色",
+    "destructiveColorLabel": "警告/错误色",
+    "verboseOutput": "详细输出",
+    "verboseOutputDescription": "显示完整的 bash 和命令输出",
+    "enableAnalytics": "启用分析",
+    "analyticsDescription": "通过共享匿名使用数据帮助改进 Claudia",
+    "privacyTitle": "您的隐私受到保护",
+    "privacyDetails": {
+      "noPersonalInfo": "不收集个人信息",
+      "noFileContents": "不收集文件内容、路径或项目名称",
+      "anonymousData": "所有数据都是匿名的，使用随机 ID",
+      "canDisable": "您可以随时禁用分析"
+    },
+    "dataCollected": {
+      "featureUsage": "功能使用模式",
+      "performance": "性能指标",
+      "errorReports": "错误报告（不包含敏感数据）",
+      "sessionInfo": "会话频率和持续时间"
+    },
+    "deleteAnalyticsData": "删除所有分析数据",
     "language": "语言",
     "theme": "主题",
     "darkMode": "深色模式",

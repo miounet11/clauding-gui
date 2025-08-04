@@ -1,0 +1,59 @@
+{
+  "todo": {
+    "title": "待办事项",
+    "header": "待办事项",
+    "subtitle": "Claude 会添加并跟踪任务",
+    "empty": {
+      "title": "暂无待办事项",
+      "subtitle": "Claude 将在这里添加任务"
+    },
+    "status": {
+      "pending": "待处理",
+      "inProgress": "进行中",
+      "completed": "已完成"
+    },
+    "priority": {
+      "high": "高",
+      "medium": "中",
+      "low": "低"
+    }
+  },
+  "bash": {
+    "title": "终端输出",
+    "running": "运行中...",
+    "executed": "已执行: {{time}}",
+    "description": "{{description}}",
+    "elapsedTime": "耗时: {{time}}ms",
+    "showOutput": "显示输出",
+    "hideOutput": "隐藏输出",
+    "showFullOutput": "显示完整输出",
+    "hideFullOutput": "隐藏完整输出",
+    "outputTruncated": "输出已截断 (显示前 {{limit}} 个字符)",
+    "copyCommand": "复制命令",
+    "copyOutput": "复制输出",
+    "outputCopied": "输出已复制到剪贴板"
+  },
+  "ls": {
+    "title": "文件列表",
+    "listed": "已列出: {{time}}",
+    "error": "错误",
+    "empty": "目录为空",
+    "filesAndDirs": "{{files}} 个文件, {{dirs}} 个目录",
+    "files": "{{count}} 个文件",
+    "dirs": "{{count}} 个目录",
+    "showHidden": "显示隐藏文件",
+    "hideHidden": "隐藏隐藏文件",
+    "expandDirs": "展开目录",
+    "collapseDirs": "折叠目录",
+    "errorLoading": "加载目录内容时出错"
+  },
+  "search": {
+    "title": "搜索结果",
+    "results": "找到 {{count}} 个结果",
+    "noResults": "未找到结果",
+    "showMore": "显示更多",
+    "showLess": "显示更少",
+    "copyPath": "复制路径",
+    "openFile": "打开文件"
+  }
+}

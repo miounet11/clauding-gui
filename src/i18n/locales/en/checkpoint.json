@@ -1,0 +1,36 @@
+{
+  "title": "Checkpoint Settings",
+  "experimentalWarning": {
+    "title": "Experimental Feature",
+    "description": "Checkpointing may affect directory structure or cause data loss. Use with caution."
+  },
+  "autoCheckpoint": {
+    "label": "Automatic Checkpoints",
+    "description": "Automatically create checkpoints based on the selected strategy"
+  },
+  "strategy": {
+    "label": "Checkpoint Strategy",
+    "manual": "Checkpoints will only be created manually",
+    "perPrompt": "A checkpoint will be created after each user prompt",
+    "perToolUse": "A checkpoint will be created after each tool use",
+    "smart": "Checkpoints will be created after destructive operations"
+  },
+  "storageManagement": {
+    "title": "Storage Management",
+    "totalCheckpoints": "Total checkpoints:",
+    "keepRecent": "Keep Recent Checkpoints",
+    "cleanupDescription": "Remove old checkpoints, keeping only the most recent {{count}}"
+  },
+  "buttons": {
+    "saveSettings": "Save Settings",
+    "saving": "Saving...",
+    "cleanUp": "Clean Up"
+  },
+  "messages": {
+    "saveSuccess": "Settings saved successfully",
+    "saveFailed": "Failed to save checkpoint settings",
+    "loadFailed": "Failed to load checkpoint settings",
+    "cleanupSuccess": "Removed {{count}} old checkpoints",
+    "cleanupFailed": "Failed to cleanup checkpoints"
+  }
+}

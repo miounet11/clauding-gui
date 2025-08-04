@@ -1,0 +1,76 @@
+{
+  "title": "MCP 服务器",
+  "subtitle": "管理模型上下文协议服务器",
+  "header": {
+    "title": "MCP 服务器",
+    "subtitle": "管理模型上下文协议服务器"
+  },
+  "tabs": {
+    "servers": "服务器",
+    "addServer": "添加服务器",
+    "importExport": "导入/导出"
+  },
+  "errors": {
+    "loadFailed": "加载 MCP 服务器失败。请确保已安装 Claude Code。"
+  },
+  "messages": {
+    "serverAdded": "MCP 服务器添加成功！",
+    "serverRemoved": "服务器 \"{{name}}\" 已成功移除！",
+    "importSuccess": "成功导入 {{imported}} 个服务器！",
+    "importSuccessPlural": "成功导入 {{imported}} 个服务器！",
+    "importPartial": "导入了 {{imported}} 个服务器，{{failed}} 个失败"
+  },
+  "serverList": {
+    "title": "已配置的服务器",
+    "noServers": "尚未配置任何 MCP 服务器",
+    "addFirst": "添加您的第一个 MCP 服务器以开始使用",
+    "columns": {
+      "name": "名称",
+      "type": "类型",
+      "status": "状态",
+      "actions": "操作"
+    },
+    "status": {
+      "connected": "已连接",
+      "disconnected": "已断开",
+      "error": "错误"
+    },
+    "actions": {
+      "remove": "移除",
+      "configure": "配置",
+      "test": "测试连接"
+    }
+  },
+  "addServer": {
+    "title": "添加新服务器",
+    "description": "配置新的 MCP 服务器",
+    "fields": {
+      "name": "服务器名称",
+      "namePlaceholder": "输入服务器名称",
+      "command": "命令",
+      "commandPlaceholder": "例如：npx @modelcontextprotocol/server-name",
+      "args": "参数",
+      "argsPlaceholder": "命令参数（可选）",
+      "env": "环境变量",
+      "envPlaceholder": "KEY=value（每行一个）"
+    },
+    "buttons": {
+      "add": "添加服务器",
+      "cancel": "取消"
+    }
+  },
+  "importExport": {
+    "title": "导入/导出配置",
+    "export": {
+      "title": "导出配置",
+      "description": "导出当前的 MCP 服务器配置",
+      "button": "导出配置"
+    },
+    "import": {
+      "title": "导入配置",
+      "description": "从文件导入 MCP 服务器配置",
+      "button": "选择文件",
+      "dragDrop": "或拖放文件到此处"
+    }
+  }
+}
