@@ -275,6 +275,11 @@ fn find_standard_installations() -> Vec<ClaudeInstallation> {
                 format!("{}/.local/bin/claude", home),
                 "local-bin".to_string(),
             ),
+            // Check Documents/claude code installation (common custom installation path)
+            (
+                format!("{}/Documents/claude code/node-v20.10.0-darwin-arm64/bin/claude", home),
+                "claude-code-custom".to_string(),
+            ),
             (
                 format!("{}/.npm-global/bin/claude", home),
                 "npm-global".to_string(),
@@ -454,10 +459,21 @@ pub fn create_command_with_env(program: &str) -> Command {
     
     info!("Creating command for: {}", program);
 
+    // Get current PATH and ensure it includes custom Claude installation
+    let mut path = std::env::var("PATH").unwrap_or_default();
+    if let Ok(home) = std::env::var("HOME") {
+        let custom_claude_path = format!("{}/Documents/claude code/node-v20.10.0-darwin-arm64/bin", home);
+        if !path.contains(&custom_claude_path) {
+            path = format!("{}:{}", custom_claude_path, path);
+            debug!("Added custom Claude path to PATH: {}", custom_claude_path);
+        }
+    }
+    cmd.env("PATH", path);
+
     // Inherit essential environment variables from parent process
     for (key, value) in std::env::vars() {
-        // Pass through PATH and other essential environment variables
-        if key == "PATH"
+        // Pass through other essential environment variables (excluding PATH as we handled it above)
+        if key == "HOME"
             || key == "HOME"
             || key == "USER"
             || key == "SHELL"
@@ -498,6 +514,20 @@ pub fn create_command_with_env(program: &str) -> Command {
             if !current_path.contains(&node_bin_str.as_ref()) {
                 let new_path = format!("{}:{}", node_bin_str, current_path);
                 debug!("Adding NVM bin directory to PATH: {}", node_bin_str);
+                cmd.env("PATH", new_path);
+            }
+        }
+    }
+    
+    // Add custom Claude installation path support
+    if program.contains("/Documents/claude code/") {
+        if let Some(node_bin_dir) = std::path::Path::new(program).parent() {
+            // Ensure the Claude bin directory is in PATH
+            let current_path = std::env::var("PATH").unwrap_or_default();
+            let node_bin_str = node_bin_dir.to_string_lossy();
+            if !current_path.contains(&node_bin_str.as_ref()) {
+                let new_path = format!("{}:{}", node_bin_str, current_path);
+                debug!("Adding Claude custom bin directory to PATH: {}", node_bin_str);
                 cmd.env("PATH", new_path);
             }
         }
