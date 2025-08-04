@@ -422,7 +422,7 @@ export const CCAgents: React.FC<CCAgentsProps> = ({ onBack, className }) => {
                                   variant="ghost"
                                   onClick={() => handleExecuteAgent(agent)}
                                   className="flex items-center gap-1"
-                                  title="Execute agent"
+                                  title={t('common:tooltips.executeAgent')}
                                 >
                                   <Play className="h-3 w-3" />
                                   {t('agents:buttons.execute')}
@@ -432,7 +432,7 @@ export const CCAgents: React.FC<CCAgentsProps> = ({ onBack, className }) => {
                                   variant="ghost"
                                   onClick={() => handleEditAgent(agent)}
                                   className="flex items-center gap-1"
-                                  title="Edit agent"
+                                  title={t('common:tooltips.editAgent')}
                                 >
                                   <Edit className="h-3 w-3" />
                                   {t('agents:buttons.edit')}
@@ -442,7 +442,7 @@ export const CCAgents: React.FC<CCAgentsProps> = ({ onBack, className }) => {
                                   variant="ghost"
                                   onClick={() => handleExportAgent(agent)}
                                   className="flex items-center gap-1"
-                                  title="Export agent to .claudia.json"
+                                  title={t('common:tooltips.exportAgent')}
                                 >
                                   <Upload className="h-3 w-3" />
                                   {t('agents:buttons.export')}
@@ -452,7 +452,7 @@ export const CCAgents: React.FC<CCAgentsProps> = ({ onBack, className }) => {
                                   variant="ghost"
                                   onClick={() => handleDeleteAgent(agent)}
                                   className="flex items-center gap-1 text-destructive hover:text-destructive"
-                                  title="Delete agent"
+                                  title={t('common:tooltips.deleteAgent')}
                                 >
                                   <Trash2 className="h-3 w-3" />
                                   {t('agents:buttons.delete')}

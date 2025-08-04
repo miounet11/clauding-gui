@@ -1,0 +1,77 @@
+{
+  "title": "Database Storage",
+  "header": {
+    "title": "Database Storage",
+    "sqlQuery": "SQL Query",
+    "resetDb": "Reset DB"
+  },
+  "table": {
+    "selectTable": "Select a table",
+    "searchPlaceholder": "Search in table...",
+    "newRow": "New Row",
+    "rows": "rows",
+    "noData": "No data available",
+    "columns": {
+      "actions": "Actions"
+    },
+    "primaryKey": "PK",
+    "type": "Type",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "pagination": {
+    "showing": "Showing {{start}} to {{end}} of {{total}} rows",
+    "page": "Page {{current}} of {{total}}",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "dialogs": {
+    "editRow": {
+      "title": "Edit Row",
+      "description": "Update the values for this row in the {{table}} table.",
+      "primaryKey": "Primary Key",
+      "required": "Required",
+      "notNull": "NOT NULL",
+      "default": "Default",
+      "update": "Update"
+    },
+    "newRow": {
+      "title": "New Row",
+      "description": "Add a new row to the {{table}} table.",
+      "insert": "Insert"
+    },
+    "deleteRow": {
+      "title": "Delete Row",
+      "description": "Are you sure you want to delete this row? This action cannot be undone."
+    },
+    "resetDatabase": {
+      "title": "Reset Database",
+      "description": "This will delete all data and recreate the database with its default structure (empty tables for agents, agent_runs, and app_settings). The database will be restored to the same state as when you first installed the app. This action cannot be undone.",
+      "warning": "All your agents, runs, and settings will be permanently deleted!",
+      "button": "Reset Database"
+    },
+    "sqlEditor": {
+      "title": "SQL Query Editor",
+      "description": "Execute raw SQL queries on the database. Use with caution.",
+      "queryLabel": "SQL Query",
+      "queryPlaceholder": "SELECT * FROM agents LIMIT 10;",
+      "execute": "Execute",
+      "close": "Close",
+      "success": "Query executed successfully. {{rows}} rows affected.",
+      "lastInsertId": "Last insert ID"
+    }
+  },
+  "messages": {
+    "loadTablesFailed": "Failed to load tables",
+    "loadDataFailed": "Failed to load table data",
+    "updateFailed": "Failed to update row",
+    "deleteFailed": "Failed to delete row",
+    "insertFailed": "Failed to insert row",
+    "executeFailed": "Failed to execute SQL",
+    "resetFailed": "Failed to reset database",
+    "resetSuccess": "Database Reset Complete: The database has been restored to its default state with empty tables (agents, agent_runs, app_settings)."
+  },
+  "status": {
+    "loading": "Loading..."
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 import { 
   Network, 
   Globe, 
@@ -50,6 +51,7 @@ export const MCPServerList: React.FC<MCPServerListProps> = ({
   onServerRemoved,
   onRefresh,
 }) => {
+  const { t } = useTranslation(['mcp', 'common']);
   const [removingServer, setRemovingServer] = useState<string | null>(null);
   const [testingServer, setTestingServer] = useState<string | null>(null);
   const [expandedServers, setExpandedServers] = useState<Set<string>>(new Set());
@@ -308,7 +310,7 @@ export const MCPServerList: React.FC<MCPServerListProps> = ({
                         className="h-6 px-2 text-xs hover:bg-primary/10"
                       >
                         <Copy className="h-3 w-3 mr-1" />
-                        {isCopied ? "Copied!" : "Copy"}
+                        {isCopied ? t('common:actions.copied') : t('common:actions.copy')}
                       </Button>
                       <Button
                         variant="ghost"
@@ -317,7 +319,7 @@ export const MCPServerList: React.FC<MCPServerListProps> = ({
                         className="h-6 px-2 text-xs hover:bg-primary/10"
                       >
                         <ChevronUp className="h-3 w-3 mr-1" />
-                        Hide
+                        {t('common:actions.hide')}
                       </Button>
                     </div>
                   </div>

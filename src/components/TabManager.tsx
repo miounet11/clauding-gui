@@ -105,7 +105,7 @@ const TabItem: React.FC<TabItemProps> = ({ tab, isActive, onClose, onClick, isDr
         {tab.hasUnsavedChanges && !statusIcon && (
           <span 
             className="w-1.5 h-1.5 bg-primary rounded-full"
-            title="Unsaved changes"
+            title={t('tooltips.unsavedChanges')}
           />
         )}
       </div>
@@ -137,6 +137,7 @@ interface TabManagerProps {
 }
 
 export const TabManager: React.FC<TabManagerProps> = ({ className }) => {
+  const { t } = useTranslation('common');
   const {
     tabs,
     activeTabId,
@@ -323,7 +324,7 @@ export const TabManager: React.FC<TabManagerProps> = ({ className }) => {
               "transition-colors duration-200 flex items-center justify-center",
               "bg-background/80 backdrop-blur-sm shadow-sm border border-border/50"
             )}
-            title="Scroll tabs left"
+            title={t('tooltips.scrollLeft')}
           >
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M15 18l-6-6 6-6" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
@@ -377,7 +378,7 @@ export const TabManager: React.FC<TabManagerProps> = ({ className }) => {
               "transition-colors duration-200 flex items-center justify-center",
               "bg-background/80 backdrop-blur-sm shadow-sm border border-border/50"
             )}
-            title="Scroll tabs right"
+            title={t('tooltips.scrollRight')}
           >
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M9 18l6-6-6-6" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />

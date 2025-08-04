@@ -23,6 +23,8 @@
   "serverList": {
     "title": "Configured Servers",
     "noServers": "No MCP servers configured yet",
+    "noServersDescription": "Add a server to get started with Model Context Protocol",
+    "refresh": "Refresh",
     "addFirst": "Add your first MCP server to get started",
     "columns": {
       "name": "Name",

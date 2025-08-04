@@ -15,6 +15,7 @@
   },
   "actions": {
     "save": "保存",
+    "saving": "保存中...",
     "cancel": "取消",
     "delete": "删除",
     "create": "创建",
@@ -22,6 +23,7 @@
     "close": "关闭",
     "confirm": "确认",
     "copy": "复制",
+    "copied": "已复制",
     "export": "导出",
     "import": "导入",
     "refresh": "刷新",
@@ -42,7 +44,22 @@
     "resume": "恢复",
     "restart": "重启",
     "download": "下载",
-    "upload": "上传"
+    "upload": "上传",
+    "execute": "执行",
+    "hide": "隐藏",
+    "show": "显示",
+    "expand": "展开",
+    "collapse": "折叠",
+    "tryAgain": "重试",
+    "newRow": "新建行",
+    "editRow": "编辑行",
+    "copyOutput": "复制输出",
+    "copyAsJsonl": "复制为 JSONL",
+    "copyAsMarkdown": "复制为 Markdown",
+    "createCheckpoint": "创建检查点",
+    "saveSelection": "保存选择",
+    "validating": "验证中...",
+    "noInstallationsFound": "未找到安装"
   },
   "status": {
     "active": "活动",
@@ -93,7 +110,15 @@
     "serverError": "服务器错误",
     "validationError": "验证错误",
     "required": "此字段为必填项",
-    "invalidFormat": "格式无效"
+    "invalidFormat": "格式无效",
+    "noFilesFound": "未找到文件",
+    "emptyDirectory": "空目录",
+    "searchFailed": "搜索失败",
+    "noMatchesFound": "未找到匹配项",
+    "commandFailed": "命令执行失败",
+    "commandCompleted": "命令执行完成",
+    "failedToLoad": "加载失败",
+    "unsavedChanges": "未保存的更改"
   },
   "topbar": {
     "claudeNotFound": "未找到 Claude Code",
@@ -119,5 +144,35 @@
     "browseProjects": "浏览项目",
     "createAgent": "创建代理",
     "viewUsage": "查看使用情况"
+  },
+  "tooltips": {
+    "executeAgent": "执行代理",
+    "editAgent": "编辑代理",
+    "deleteAgent": "删除代理",
+    "exportAgent": "导出代理为 .claudia.json",
+    "scrollLeft": "向左滚动标签页",
+    "scrollRight": "向右滚动标签页",
+    "fullscreen": "全屏",
+    "exitFullscreen": "退出全屏 (ESC)",
+    "enterFullscreen": "进入全屏",
+    "refresh": "刷新输出",
+    "preview": "预览",
+    "clickToSelect": "点击选择",
+    "clickToSelectDoubleClickToEnter": "点击选择 • 双击进入",
+    "unsavedChanges": "未保存的更改"
+  },
+  "placeholders": {
+    "enterUrl": "输入 URL...",
+    "searchCommands": "搜索命令...",
+    "searchFiles": "搜索文件...",
+    "searchInTable": "在表中搜索...",
+    "selectTable": "选择表",
+    "selectInstallation": "选择 Claude 安装",
+    "enterName": "输入名称",
+    "enterDescription": "输入描述",
+    "enterTask": "输入任务",
+    "selectOrEnterPath": "选择或输入项目路径",
+    "enterSessionName": "输入分叉会话的名称",
+    "sqlQuery": "SELECT * FROM agents LIMIT 10;"
   }
 }

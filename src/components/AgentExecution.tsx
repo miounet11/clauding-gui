@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 import { 
   ArrowLeft, 
   Play, 
@@ -81,6 +82,7 @@ export const AgentExecution: React.FC<AgentExecutionProps> = ({
   onBack,
   className,
 }) => {
+  const { t } = useTranslation('common');
   const [projectPath, setProjectPath] = useState("");
   const [task, setTask] = useState(agent.default_task || "");
   const [model, setModel] = useState(agent.model || "sonnet");
@@ -617,7 +619,7 @@ export const AgentExecution: React.FC<AgentExecutionProps> = ({
                 <Input
                   value={projectPath}
                   onChange={(e) => setProjectPath(e.target.value)}
-                  placeholder="Select or enter project path"
+                  placeholder={t('placeholders.selectOrEnterPath')}
                   disabled={isRunning}
                   className="flex-1"
                 />
@@ -706,7 +708,7 @@ export const AgentExecution: React.FC<AgentExecutionProps> = ({
                 <Input
                   value={task}
                   onChange={(e) => setTask(e.target.value)}
-                  placeholder="Enter the task for the agent"
+                  placeholder={t('placeholders.enterTask')}
                   disabled={isRunning}
                   className="flex-1"
                   onKeyPress={(e) => {

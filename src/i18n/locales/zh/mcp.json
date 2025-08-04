@@ -23,6 +23,8 @@
   "serverList": {
     "title": "已配置的服务器",
     "noServers": "尚未配置任何 MCP 服务器",
+    "noServersDescription": "添加服务器以开始使用模型上下文协议",
+    "refresh": "刷新",
     "addFirst": "添加您的第一个 MCP 服务器以开始使用",
     "columns": {
       "name": "名称",

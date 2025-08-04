@@ -1,0 +1,77 @@
+{
+  "title": "数据库存储",
+  "header": {
+    "title": "数据库存储",
+    "sqlQuery": "SQL 查询",
+    "resetDb": "重置数据库"
+  },
+  "table": {
+    "selectTable": "选择表",
+    "searchPlaceholder": "在表中搜索...",
+    "newRow": "新建行",
+    "rows": "行",
+    "noData": "暂无数据",
+    "columns": {
+      "actions": "操作"
+    },
+    "primaryKey": "主键",
+    "type": "类型",
+    "edit": "编辑",
+    "delete": "删除"
+  },
+  "pagination": {
+    "showing": "显示 {{start}} 到 {{end}} 条，共 {{total}} 条",
+    "page": "第 {{current}} 页，共 {{total}} 页",
+    "previous": "上一页",
+    "next": "下一页"
+  },
+  "dialogs": {
+    "editRow": {
+      "title": "编辑行",
+      "description": "更新 {{table}} 表中此行的值。",
+      "primaryKey": "主键",
+      "required": "必填",
+      "notNull": "非空",
+      "default": "默认值",
+      "update": "更新"
+    },
+    "newRow": {
+      "title": "新建行",
+      "description": "向 {{table}} 表添加新行。",
+      "insert": "插入"
+    },
+    "deleteRow": {
+      "title": "删除行",
+      "description": "确定要删除此行吗？此操作无法撤销。"
+    },
+    "resetDatabase": {
+      "title": "重置数据库",
+      "description": "这将删除所有数据并使用默认结构重新创建数据库（agents、agent_runs 和 app_settings 的空表）。数据库将恢复到首次安装应用时的状态。此操作无法撤销。",
+      "warning": "您的所有代理、运行记录和设置将被永久删除！",
+      "button": "重置数据库"
+    },
+    "sqlEditor": {
+      "title": "SQL 查询编辑器",
+      "description": "对数据库执行原始 SQL 查询。请谨慎使用。",
+      "queryLabel": "SQL 查询",
+      "queryPlaceholder": "SELECT * FROM agents LIMIT 10;",
+      "execute": "执行",
+      "close": "关闭",
+      "success": "查询执行成功。影响了 {{rows}} 行。",
+      "lastInsertId": "最后插入 ID"
+    }
+  },
+  "messages": {
+    "loadTablesFailed": "加载表失败",
+    "loadDataFailed": "加载表数据失败",
+    "updateFailed": "更新行失败",
+    "deleteFailed": "删除行失败",
+    "insertFailed": "插入行失败",
+    "executeFailed": "执行 SQL 失败",
+    "resetFailed": "重置数据库失败",
+    "resetSuccess": "数据库重置完成：数据库已恢复到默认状态，包含空表（agents、agent_runs、app_settings）。"
+  },
+  "status": {
+    "loading": "加载中..."
+  }
+}

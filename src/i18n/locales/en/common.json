@@ -15,6 +15,7 @@
   },
   "actions": {
     "save": "Save",
+    "saving": "Saving...",
     "cancel": "Cancel",
     "delete": "Delete",
     "create": "Create",
@@ -22,6 +23,7 @@
     "close": "Close",
     "confirm": "Confirm",
     "copy": "Copy",
+    "copied": "Copied!",
     "export": "Export",
     "import": "Import",
     "refresh": "Refresh",
@@ -42,7 +44,22 @@
     "resume": "Resume",
     "restart": "Restart",
     "download": "Download",
-    "upload": "Upload"
+    "upload": "Upload",
+    "execute": "Execute",
+    "hide": "Hide",
+    "show": "Show",
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "tryAgain": "Try Again",
+    "newRow": "New Row",
+    "editRow": "Edit Row",
+    "copyOutput": "Copy Output",
+    "copyAsJsonl": "Copy as JSONL",
+    "copyAsMarkdown": "Copy as Markdown",
+    "createCheckpoint": "Create Checkpoint",
+    "saveSelection": "Save Selection",
+    "validating": "Validating...",
+    "noInstallationsFound": "No Installations Found"
   },
   "status": {
     "active": "Active",
@@ -93,7 +110,15 @@
     "serverError": "Server error",
     "validationError": "Validation error",
     "required": "This field is required",
-    "invalidFormat": "Invalid format"
+    "invalidFormat": "Invalid format",
+    "noFilesFound": "No files found",
+    "emptyDirectory": "Empty directory",
+    "searchFailed": "Search failed",
+    "noMatchesFound": "No matches found",
+    "commandFailed": "Command failed",
+    "commandCompleted": "Command completed",
+    "failedToLoad": "Failed to load",
+    "unsavedChanges": "Unsaved changes"
   },
   "topbar": {
     "claudeNotFound": "Claude Code not found",
@@ -119,5 +144,35 @@
     "browseProjects": "Browse Projects",
     "createAgent": "Create Agent",
     "viewUsage": "View Usage"
+  },
+  "tooltips": {
+    "executeAgent": "Execute agent",
+    "editAgent": "Edit agent",
+    "deleteAgent": "Delete agent",
+    "exportAgent": "Export agent to .claudia.json",
+    "scrollLeft": "Scroll tabs left",
+    "scrollRight": "Scroll tabs right",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit fullscreen (ESC)",
+    "enterFullscreen": "Enter fullscreen",
+    "refresh": "Refresh output",
+    "preview": "Preview",
+    "clickToSelect": "Click to select",
+    "clickToSelectDoubleClickToEnter": "Click to select • Double-click to enter",
+    "unsavedChanges": "Unsaved changes"
+  },
+  "placeholders": {
+    "enterUrl": "Enter URL...",
+    "searchCommands": "Search commands...",
+    "searchFiles": "Search files...",
+    "searchInTable": "Search in table...",
+    "selectTable": "Select table",
+    "selectInstallation": "Select Claude installation",
+    "enterName": "Enter name",
+    "enterDescription": "Enter description",
+    "enterTask": "Enter the task",
+    "selectOrEnterPath": "Select or enter project path",
+    "enterSessionName": "Enter a name for the forked session",
+    "sqlQuery": "SELECT * FROM agents LIMIT 10;"
   }
 }

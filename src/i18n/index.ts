@@ -13,6 +13,7 @@ import zhUsage from './locales/zh/usage.json';
 import zhCheckpoint from './locales/zh/checkpoint.json';
 import zhMCP from './locales/zh/mcp.json';
 import zhWidgets from './locales/zh/widgets.json';
+import zhStorage from './locales/zh/storage.json';
 
 import enCommon from './locales/en/common.json';
 import enSettings from './locales/en/settings.json';
@@ -24,6 +25,7 @@ import enUsage from './locales/en/usage.json';
 import enCheckpoint from './locales/en/checkpoint.json';
 import enMCP from './locales/en/mcp.json';
 import enWidgets from './locales/en/widgets.json';
+import enStorage from './locales/en/storage.json';
 
 const resources = {
   zh: {
@@ -37,6 +39,7 @@ const resources = {
     checkpoint: zhCheckpoint,
     mcp: zhMCP,
     widgets: zhWidgets,
+    storage: zhStorage,
   },
   en: {
     common: enCommon,
@@ -49,6 +52,7 @@ const resources = {
     checkpoint: enCheckpoint,
     mcp: enMCP,
     widgets: enWidgets,
+    storage: enStorage,
   }
 };
 
@@ -59,7 +63,7 @@ i18n
     resources,
     fallbackLng: 'zh', // Default to Chinese
     defaultNS: 'common',
-    ns: ['common', 'settings', 'sessions', 'agents', 'errors', 'projects', 'usage', 'checkpoint', 'mcp', 'widgets'],
+    ns: ['common', 'settings', 'sessions', 'agents', 'errors', 'projects', 'usage', 'checkpoint', 'mcp', 'widgets', 'storage'],
     
     interpolation: {
       escapeValue: false // React already escapes values

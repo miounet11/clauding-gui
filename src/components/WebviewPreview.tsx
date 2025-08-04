@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 import {
   ArrowLeft,
   ArrowRight,
@@ -61,6 +62,7 @@ const WebviewPreviewComponent: React.FC<WebviewPreviewProps> = ({
   onUrlChange,
   className,
 }) => {
+  const { t } = useTranslation('common');
   const [currentUrl, setCurrentUrl] = useState(initialUrl);
   const [inputUrl, setInputUrl] = useState(initialUrl);
   const [isLoading, setIsLoading] = useState(false);
@@ -270,7 +272,7 @@ const WebviewPreviewComponent: React.FC<WebviewPreviewProps> = ({
               value={inputUrl}
               onChange={(e) => setInputUrl(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Enter URL..."
+              placeholder={t('placeholders.enterUrl')}
               className="pr-10 h-8 text-sm font-mono"
             />
             {inputUrl !== currentUrl && (
