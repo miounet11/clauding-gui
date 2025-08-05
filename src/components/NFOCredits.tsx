@@ -84,37 +84,38 @@ export const NFOCredits: React.FC<NFOCreditsProps> = ({ onClose }) => {
   
   // Credits content
   const creditsContent = [
-    { type: "header", text: "CLAUDIA v0.1.0" },
-    { type: "subheader", text: "[ A STRATEGIC PROJECT BY ASTERISK ]" },
+    { type: "header", text: "CLAUDING GUI v3.0.1" },
+    { type: "subheader", text: "[ 一个由 MIOUNET11 呈现的中文项目 ]" },
     { type: "spacer" },
-    { type: "section", title: "━━━ CREDITS ━━━" },
-    { type: "credit", role: "POWERED BY", name: "Anthropic Claude 4" },
-    { type: "credit", role: "CLAUDE CODE", name: "The Ultimate Coding Assistant" },
-    { type: "credit", role: "MCP PROTOCOL", name: "Model Context Protocol" },
+    { type: "section", title: "━━━ 鸣谢 ━━━" },
+    { type: "credit", role: "技术支持", name: "Anthropic Claude 4" },
+    { type: "credit", role: "CLAUDE CODE", name: "终极编程助手" },
+    { type: "credit", role: "MCP 协议", name: "模型上下文协议" },
     { type: "spacer" },
-    { type: "section", title: "━━━ DEPENDENCIES ━━━" },
-    { type: "credit", role: "RUNTIME", name: "Tauri Framework" },
-    { type: "credit", role: "UI FRAMEWORK", name: "React + TypeScript" },
-    { type: "credit", role: "STYLING", name: "Tailwind CSS + shadcn/ui" },
-    { type: "credit", role: "ANIMATIONS", name: "Framer Motion" },
-    { type: "credit", role: "BUILD TOOL", name: "Vite" },
-    { type: "credit", role: "PACKAGE MANAGER", name: "Bun" },
+    { type: "section", title: "━━━ 依赖项 ━━━" },
+    { type: "credit", role: "运行时", name: "Tauri 框架" },
+    { type: "credit", role: "UI 框架", name: "React + TypeScript" },
+    { type: "credit", role: "样式", name: "Tailwind CSS + shadcn/ui" },
+    { type: "credit", role: "动画", name: "Framer Motion" },
+    { type: "credit", role: "构建工具", name: "Vite" },
+    { type: "credit", role: "包管理器", name: "Bun" },
     { type: "spacer" },
-    { type: "section", title: "━━━ SPECIAL THANKS ━━━" },
-    { type: "text", content: "To the open source community" },
-    { type: "text", content: "To all the beta testers" },
-    { type: "text", content: "To everyone who believed in this project" },
+    { type: "section", title: "━━━ 特别鸣谢 ━━━" },
+    { type: "text", content: "感谢开源社区" },
+    { type: "text", content: "感谢所有 Beta 测试者" },
+    { type: "text", content: "感谢所有相信这个项目的人" },
     { type: "spacer" },
     { type: "ascii", content: `
-     ▄▄▄· .▄▄ · ▄▄▄▄▄▄▄▄ .▄▄▄  ▪  .▄▄ · ▄ •▄ 
-    ▐█ ▀█ ▐█ ▀. •██  ▀▄.▀·▀▄ █·██ ▐█ ▀. █▌▄▌▪
-    ▄█▀▀█ ▄▀▀▀█▄ ▐█.▪▐▀▀▪▄▐▀▀▄ ▐█·▄▀▀▀█▄▐▀▀▄·
-    ▐█ ▪▐▌▐█▄▪▐█ ▐█▌·▐█▄▄▌▐█•█▌▐█▌▐█▄▪▐█▐█.█▌
-     ▀  ▀  ▀▀▀▀  ▀▀▀  ▀▀▀ .▀  ▀▀▀▀ ▀▀▀▀ ·▀  ▀
+     ▄████▄   ██▓    ▄▄▄       █    ██ ▓█████▄  ██▓ ███▄    █   ▄████ 
+    ▒██▀ ▀█  ▓██▒   ▒████▄     ██  ▓██▒▒██▀ ██▌▓██▒ ██ ▀█   █  ██▒ ▀█▒
+    ▒▓█    ▄ ▒██░   ▒██  ▀█▄  ▓██  ▒██░░██   █▌▒██▒▓██  ▀█ ██▒▒██░▄▄▄░
+    ▒▓▓▄ ▄██▒▒██░   ░██▄▄▄▄██ ▓▓█  ░██░░▓█▄   ▌░██░▓██▒  ▐▌██▒░▓█  ██▓
+    ▒ ▓███▀ ░░██████▒▓█   ▓██▒▒▒█████▓ ░▒████▓ ░██░▒██░   ▓██░░▒▓███▀▒
+    ░ ░▒ ▒  ░░ ▒░▓  ░▒▒   ▓▒█░░▒▓▒ ▒ ▒  ▒▒▓  ▒ ░▓  ░ ▒░   ▒ ▒  ░▒   ▒ 
     ` },
     { type: "spacer" },
-    { type: "text", content: "Remember: Sharing is caring!" },
-    { type: "text", content: "Support the developers!" },
+    { type: "text", content: "记住：分享就是关爱！" },
+    { type: "text", content: "支持开发者！" },
     { type: "spacer" },
     { type: "spacer" },
     { type: "spacer" },
@@ -147,7 +148,7 @@ export const NFOCredits: React.FC<NFOCreditsProps> = ({ onClose }) => {
             <div className="flex items-center justify-between px-4 py-2 bg-card border-b border-border">
               <div className="flex items-center space-x-2">
                 <div className="text-sm font-bold tracking-wider font-mono text-foreground">
-                  CLAUDIA.NFO
+                  CLAUDING GUI.NFO
                 </div>
               </div>
               <div className="flex items-center space-x-2">
@@ -156,13 +157,13 @@ export const NFOCredits: React.FC<NFOCreditsProps> = ({ onClose }) => {
                   size="sm"
                   onClick={async (e) => {
                     e.stopPropagation();
-                    await openUrl("https://github.com/getAsterisk/claudia/issues/new");
+                    await openUrl("https://github.com/miounet11/clauding-gui/issues/new");
                   }}
                   className="flex items-center gap-1 h-auto px-2 py-1"
-                  title="File a bug"
+                  title="提交 Bug"
                 >
                   <Github className="h-3 w-3" />
-                  <span className="text-xs">File a bug</span>
+                  <span className="text-xs">提交 Bug</span>
                 </Button>
                 <Button
                   variant="ghost"
@@ -197,7 +198,7 @@ export const NFOCredits: React.FC<NFOCreditsProps> = ({ onClose }) => {
                   className="inline-block mt-4 hover:scale-110 transition-transform cursor-pointer"
                   onClick={async (e) => {
                     e.stopPropagation();
-                    await openUrl("https://asterisk.so");
+                    await openUrl("https://github.com/miounet11");
                   }}
                 >
                   <img 
@@ -207,7 +208,7 @@ export const NFOCredits: React.FC<NFOCreditsProps> = ({ onClose }) => {
                   />
                 </button>
                 <div className="text-muted-foreground text-sm font-mono mt-2 tracking-wider">
-                  A strategic project by Asterisk
+                  一个由 miounet11 呈现的中文项目
                 </div>
               </div>
               
