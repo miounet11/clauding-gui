@@ -616,7 +616,7 @@ dependencies = [
 
 [[package]]
 name = "clauding-gui"
-version = "2.0.7"
+version = "2.0.8"
 dependencies = [
  "anyhow",
  "async-trait",

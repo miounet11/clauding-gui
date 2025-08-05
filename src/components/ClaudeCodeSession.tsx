@@ -115,6 +115,7 @@ export const ClaudeCodeSession: React.FC<ClaudeCodeSessionProps> = ({
   const isMountedRef = useRef(true);
   const isListeningRef = useRef(false);
   const sessionStartTime = useRef<number>(Date.now());
+  const responseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   // Session metrics state for enhanced analytics
   const sessionMetrics = useRef({
@@ -491,8 +492,9 @@ export const ClaudeCodeSession: React.FC<ClaudeCodeSessionProps> = ({
         setClaudeSessionId(effectiveSession.id);
       }
       
-      // Only clean up and set up new listeners if not already listening
-      if (!isListeningRef.current) {
+      // Always clean up and set up new listeners for new prompts
+      // This ensures we don't miss messages due to stale listeners
+      if (!isListeningRef.current || isFirstPrompt) {
         // Clean up previous listeners
         unlistenRefs.current.forEach(unlisten => unlisten());
         unlistenRefs.current = [];
@@ -657,6 +659,12 @@ export const ClaudeCodeSession: React.FC<ClaudeCodeSessionProps> = ({
           setIsLoading(false);
           hasActiveSessionRef.current = false;
           isListeningRef.current = false; // Reset listening state
+          
+          // 清除响应超时
+          if (responseTimeoutRef.current) {
+            clearTimeout(responseTimeoutRef.current);
+            responseTimeoutRef.current = null;
+          }
           
           // Track enhanced session stopped metrics when session completes
           if (effectiveSession && claudeSessionId) {
@@ -835,12 +843,36 @@ export const ClaudeCodeSession: React.FC<ClaudeCodeSessionProps> = ({
           trackEvent.modelSelected(model);
           await api.executeClaudeCode(projectPath, prompt, model);
         }
+        
+        // 设置响应超时（60秒）
+        if (responseTimeoutRef.current) {
+          clearTimeout(responseTimeoutRef.current);
+        }
+        responseTimeoutRef.current = setTimeout(() => {
+          if (isLoading && hasActiveSessionRef.current) {
+            console.error('[ClaudeCodeSession] Response timeout after 60 seconds');
+            setError("响应超时。Claude 可能正在处理复杂任务，或者遇到了问题。");
+            setIsLoading(false);
+            hasActiveSessionRef.current = false;
+            isListeningRef.current = false;
+            
+            // 清理监听器
+            unlistenRefs.current.forEach(unlisten => unlisten());
+            unlistenRefs.current = [];
+          }
+        }, 60000); // 60秒超时
       }
     } catch (err) {
       console.error("Failed to send prompt:", err);
       setError("Failed to send prompt");
       setIsLoading(false);
       hasActiveSessionRef.current = false;
+      
+      // 清除超时
+      if (responseTimeoutRef.current) {
+        clearTimeout(responseTimeoutRef.current);
+        responseTimeoutRef.current = null;
+      }
     }
   };
 
@@ -1117,6 +1149,12 @@ export const ClaudeCodeSession: React.FC<ClaudeCodeSessionProps> = ({
       console.log('[ClaudeCodeSession] Component unmounting, cleaning up listeners');
       isMountedRef.current = false;
       isListeningRef.current = false;
+      
+      // 清除响应超时
+      if (responseTimeoutRef.current) {
+        clearTimeout(responseTimeoutRef.current);
+        responseTimeoutRef.current = null;
+      }
       
       // Track session completion with engagement metrics
       if (effectiveSession) {
