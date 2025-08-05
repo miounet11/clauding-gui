@@ -249,13 +249,14 @@ fn create_command_with_env(program: &str) -> Command {
         }
     }
 
-    // Add NVM support if the program is in an NVM directory
-    if program.contains("/.nvm/versions/node/") {
+    // Add Node.js bin directory to PATH for NVM and custom installations
+    if program.contains("/.nvm/versions/node/") || program.contains("/node-v") {
         if let Some(node_bin_dir) = std::path::Path::new(program).parent() {
             let current_path = std::env::var("PATH").unwrap_or_default();
             let node_bin_str = node_bin_dir.to_string_lossy();
             if !current_path.contains(&node_bin_str.as_ref()) {
                 let new_path = format!("{}:{}", node_bin_str, current_path);
+                log::debug!("Adding Node.js bin directory to PATH: {}", node_bin_str);
                 tokio_cmd.env("PATH", new_path);
             }
         }

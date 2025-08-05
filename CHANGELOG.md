@@ -2,6 +2,15 @@
 
 所有重要的更改都将记录在此文件中。
 
+## [2.0.7] - 2025-08-05
+
+### 🐛 Bug 修复
+
+- **修复 Node.js 环境错误**
+  - ✅ 解决 "env: node: No such file or directory" 错误
+  - ✅ 支持自定义 Node.js 安装路径（如 `/Documents/claude code/node-v*`）
+  - ✅ 自动将 Node.js bin 目录添加到 PATH 环境变量
+
 ## [2.0.6] - 2025-08-05
 
 ### 🎨 视觉更新

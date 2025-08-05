@@ -19,7 +19,6 @@ export const AnalyticsConsent: React.FC<AnalyticsConsentProps> = ({
   onOpenChange,
   onComplete,
 }) => {
-  const { t } = useTranslation(['settings', 'common']);
   const [internalOpen, setInternalOpen] = useState(false);
   const [hasShownConsent, setHasShownConsent] = useState(false);
   
@@ -152,6 +151,7 @@ interface AnalyticsConsentBannerProps {
 export const AnalyticsConsentBanner: React.FC<AnalyticsConsentBannerProps> = ({
   className,
 }) => {
+  const { t } = useTranslation(['settings', 'common']);
   const [visible, setVisible] = useState(false);
   const [hasChecked, setHasChecked] = useState(false);
   
