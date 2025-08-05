@@ -61,7 +61,7 @@ export const useTabState = (): UseTabStateReturn => {
   const agentTabCount = useMemo(() => getTabsByType('agent').length, [getTabsByType]);
 
   const createChatTab = useCallback((projectId?: string, title?: string): string => {
-    const tabTitle = title || `Chat ${chatTabCount + 1}`;
+    const tabTitle = title || `聊天 ${chatTabCount + 1}`;
     return addTab({
       type: 'chat',
       title: tabTitle,
@@ -100,7 +100,7 @@ export const useTabState = (): UseTabStateReturn => {
 
     return addTab({
       type: 'projects',
-      title: 'CC Projects',
+      title: 'CC 项目',
       status: 'idle',
       hasUnsavedChanges: false,
       icon: 'folder'
@@ -117,7 +117,7 @@ export const useTabState = (): UseTabStateReturn => {
 
     return addTab({
       type: 'usage',
-      title: 'Usage',
+      title: '使用情况',
       status: 'idle',
       hasUnsavedChanges: false,
       icon: 'bar-chart'
@@ -134,7 +134,7 @@ export const useTabState = (): UseTabStateReturn => {
 
     return addTab({
       type: 'mcp',
-      title: 'MCP Servers',
+      title: 'MCP 服务器',
       status: 'idle',
       hasUnsavedChanges: false,
       icon: 'server'
@@ -151,7 +151,7 @@ export const useTabState = (): UseTabStateReturn => {
 
     return addTab({
       type: 'settings',
-      title: 'Settings',
+      title: '设置',
       status: 'idle',
       hasUnsavedChanges: false,
       icon: 'settings'
@@ -196,7 +196,7 @@ export const useTabState = (): UseTabStateReturn => {
   const createAgentExecutionTab = useCallback((agent: any, _tabId: string): string => {
     return addTab({
       type: 'agent-execution',
-      title: `Run: ${agent.name}`,
+      title: `运行：${agent.name}`,
       agentData: agent,
       status: 'idle',
       hasUnsavedChanges: false,
@@ -214,7 +214,7 @@ export const useTabState = (): UseTabStateReturn => {
 
     return addTab({
       type: 'create-agent',
-      title: 'Create Agent',
+      title: '创建智能体',
       status: 'idle',
       hasUnsavedChanges: false,
       icon: 'plus'
@@ -231,7 +231,7 @@ export const useTabState = (): UseTabStateReturn => {
 
     return addTab({
       type: 'import-agent',
-      title: 'Import Agent',
+      title: '导入智能体',
       status: 'idle',
       hasUnsavedChanges: false,
       icon: 'import'
@@ -245,7 +245,7 @@ export const useTabState = (): UseTabStateReturn => {
     // Check for unsaved changes
     if (!force && tab.hasUnsavedChanges) {
       // In a real implementation, you'd show a confirmation dialog here
-      const confirmed = window.confirm(`Tab "${tab.title}" has unsaved changes. Close anyway?`);
+      const confirmed = window.confirm(`标签页 "${tab.title}" 有未保存的更改。仍然关闭吗？`);
       if (!confirmed) return false;
     }
 

@@ -92,7 +92,7 @@ export const Topbar: React.FC<TopbarProps> = ({
       return (
         <div className="flex items-center space-x-2 text-xs">
           <Circle className="h-3 w-3 animate-pulse text-muted-foreground" />
-          <span className="text-muted-foreground">Checking...</span>
+          <span className="text-muted-foreground">检测中...</span>
         </div>
       );
     }
@@ -130,7 +130,7 @@ export const Topbar: React.FC<TopbarProps> = ({
           trigger={statusContent}
           content={
             <div className="space-y-3 max-w-xs">
-              <p className="text-sm font-medium">Claude Code not found</p>
+              <p className="text-sm font-medium">未找到 Claude Code</p>
               <div className="rounded-md bg-muted p-3">
                 <pre className="text-xs font-mono whitespace-pre-wrap">
                   {versionStatus.output}
@@ -142,7 +142,7 @@ export const Topbar: React.FC<TopbarProps> = ({
                 className="w-full"
                 onClick={onSettingsClick}
               >
-                Select Claude Installation
+                选择 Claude 安装路径
               </Button>
               <a
                 href="https://www.anthropic.com/claude-code"
@@ -150,7 +150,7 @@ export const Topbar: React.FC<TopbarProps> = ({
                 rel="noopener noreferrer"
                 className="flex items-center space-x-1 text-xs text-primary hover:underline"
               >
-                <span>Install Claude Code</span>
+                <span>安装 Claude Code</span>
                 <ExternalLink className="h-3 w-3" />
               </a>
             </div>
@@ -186,7 +186,7 @@ export const Topbar: React.FC<TopbarProps> = ({
             className="text-xs"
           >
             <Bot className="mr-2 h-3 w-3" />
-            Agents
+            智能体
           </Button>
         )}
         
@@ -197,7 +197,7 @@ export const Topbar: React.FC<TopbarProps> = ({
           className="text-xs"
         >
           <BarChart3 className="mr-2 h-3 w-3" />
-          Usage Dashboard
+          使用情况仪表板
         </Button>
         
         <Button
@@ -227,7 +227,7 @@ export const Topbar: React.FC<TopbarProps> = ({
           className="text-xs"
         >
           <Settings className="mr-2 h-3 w-3" />
-          Settings
+          设置
         </Button>
         
         <Button
@@ -235,7 +235,7 @@ export const Topbar: React.FC<TopbarProps> = ({
           size="icon"
           onClick={onInfoClick}
           className="h-8 w-8"
-          title="About"
+          title="关于"
         >
           <Info className="h-4 w-4" />
         </Button>

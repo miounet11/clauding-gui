@@ -452,7 +452,7 @@ export const AgentExecution: React.FC<AgentExecutionProps> = ({
     if (isRunning) {
       // Show confirmation dialog before navigating away during execution
       const shouldLeave = window.confirm(
-        "An agent is currently running. If you navigate away, the agent will continue running in the background. You can view running sessions in the 'Running Sessions' tab within CC Agents.\n\nDo you want to continue?"
+        "智能体正在运行中。如果您离开此页面，智能体将在后台继续运行。您可以在 CC 智能体的"运行中的会话"标签页中查看运行中的会话。\n\n您要继续吗？"
       );
       if (!shouldLeave) {
         return;

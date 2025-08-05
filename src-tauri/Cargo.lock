@@ -615,8 +615,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "claudia"
-version = "0.1.0"
+name = "clauding-gui"
+version = "3.0.1"
 dependencies = [
  "anyhow",
  "async-trait",
