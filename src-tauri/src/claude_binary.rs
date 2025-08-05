@@ -474,7 +474,6 @@ pub fn create_command_with_env(program: &str) -> Command {
     for (key, value) in std::env::vars() {
         // Pass through other essential environment variables (excluding PATH as we handled it above)
         if key == "HOME"
-            || key == "HOME"
             || key == "USER"
             || key == "SHELL"
             || key == "LANG"
@@ -485,11 +484,16 @@ pub fn create_command_with_env(program: &str) -> Command {
             || key == "NVM_BIN"
             || key == "HOMEBREW_PREFIX"
             || key == "HOMEBREW_CELLAR"
-            // Add proxy environment variables (only uppercase)
+            || key == "ANTHROPIC_API_KEY"
+            || key.starts_with("CLAUDE_")
             || key == "HTTP_PROXY"
             || key == "HTTPS_PROXY"
             || key == "NO_PROXY"
             || key == "ALL_PROXY"
+            || key == "http_proxy"
+            || key == "https_proxy"
+            || key == "no_proxy"
+            || key == "all_proxy"
         {
             debug!("Inheriting env var: {}={}", key, value);
             cmd.env(&key, &value);

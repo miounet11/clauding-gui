@@ -243,6 +243,16 @@ fn create_command_with_env(program: &str) -> Command {
             || key == "NVM_BIN"
             || key == "HOMEBREW_PREFIX"
             || key == "HOMEBREW_CELLAR"
+            || key == "ANTHROPIC_API_KEY"
+            || key.starts_with("CLAUDE_")
+            || key == "HTTP_PROXY"
+            || key == "HTTPS_PROXY"
+            || key == "NO_PROXY"
+            || key == "ALL_PROXY"
+            || key == "http_proxy"
+            || key == "https_proxy"
+            || key == "no_proxy"
+            || key == "all_proxy"
         {
             log::debug!("Inheriting env var: {}={}", key, value);
             tokio_cmd.env(&key, &value);
