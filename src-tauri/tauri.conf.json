@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Claudia",
+  "productName": "Clauding GUI",
   "version": "0.1.0",
-  "identifier": "claudia.asterisk.so",
+  "identifier": "com.miounet11.clauding-gui",
   "build": {
     "beforeDevCommand": "bun run dev",
     "devUrl": "http://localhost:1420",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "Claudia",
+        "title": "Clauding GUI",
         "width": 800,
         "height": 600
       }
@@ -65,10 +65,10 @@
     ],
     "resources": [],
     "externalBin": [],
-    "copyright": "© 2025 Asterisk. All rights reserved.",
+    "copyright": "© 2025 miounet11. 保留所有权利。",
     "category": "DeveloperTool",
-    "shortDescription": "GUI app and Toolkit for Claude Code",
-    "longDescription": "Claudia is a comprehensive GUI application and toolkit for working with Claude Code, providing an intuitive interface for AI-assisted development.",
+    "shortDescription": "Claude Code 的中文桌面客户端",
+    "longDescription": "Clauding GUI 是一个全面的中文桌面应用程序，用于与 Claude Code 进行交互，为 AI 辅助开发提供直观的界面。",
     "linux": {
       "appimage": {
         "bundleMediaFramework": true

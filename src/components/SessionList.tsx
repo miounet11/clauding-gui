@@ -89,7 +89,7 @@ export const SessionList: React.FC<SessionListProps> = ({
         <div className="flex-1 min-w-0">
           <h2 className="text-base font-medium truncate">{projectPath}</h2>
           <p className="text-xs text-muted-foreground">
-            {sessions.length} session{sessions.length !== 1 ? 's' : ''}
+            {sessions.length} 个会话
           </p>
         </div>
       </motion.div>
@@ -149,7 +149,7 @@ export const SessionList: React.FC<SessionListProps> = ({
                             <div className="space-y-1">
                               <div className="flex items-center space-x-1 text-xs text-muted-foreground">
                                 <MessageSquare className="h-3 w-3" />
-                                <span>First message:</span>
+                                <span>第一条消息：</span>
                               </div>
                               <p className="text-xs line-clamp-2 text-foreground/80">
                                 {truncateText(getFirstLine(session.first_message), 100)}
@@ -173,7 +173,7 @@ export const SessionList: React.FC<SessionListProps> = ({
                             {session.todo_data && (
                               <div className="flex items-center space-x-1">
                                 <Calendar className="h-3 w-3" />
-                                <span>Has todo</span>
+                                <span>包含待办事项</span>
                               </div>
                             )}
                           </div>

@@ -178,7 +178,7 @@ export const Settings: React.FC<SettingsProps> = ({
       }
     } catch (err) {
       console.error("Failed to load settings:", err);
-      setError("Failed to load settings. Please ensure ~/.claude directory exists.");
+      setError("加载设置失败。请确保 ~/.claude 目录存在。");
       setSettings({});
     } finally {
       setLoading(false);
@@ -232,11 +232,11 @@ export const Settings: React.FC<SettingsProps> = ({
         setProxySettingsChanged(false);
       }
 
-      setToast({ message: "Settings saved successfully!", type: "success" });
+      setToast({ message: "设置保存成功！", type: "success" });
     } catch (err) {
       console.error("Failed to save settings:", err);
-      setError("Failed to save settings.");
-      setToast({ message: "Failed to save settings", type: "error" });
+      setError("保存设置失败。");
+      setToast({ message: "保存设置失败", type: "error" });
     } finally {
       setSaving(false);
     }
@@ -347,9 +347,9 @@ export const Settings: React.FC<SettingsProps> = ({
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <div>
-          <h2 className="text-lg font-semibold">Settings</h2>
+          <h2 className="text-lg font-semibold">设置</h2>
           <p className="text-xs text-muted-foreground">
-              Configure Claude Code preferences
+              配置 Claude Code 首选项
           </p>
           </div>
         </div>
@@ -363,12 +363,12 @@ export const Settings: React.FC<SettingsProps> = ({
           {saving ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin" />
-              Saving...
+              保存中...
             </>
           ) : (
             <>
               <Save className="h-4 w-4" />
-              Save Settings
+              保存设置
             </>
           )}
         </Button>
@@ -398,55 +398,55 @@ export const Settings: React.FC<SettingsProps> = ({
         <div className="flex-1 overflow-y-auto p-4">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid grid-cols-9 w-full">
-              <TabsTrigger value="general">General</TabsTrigger>
-              <TabsTrigger value="permissions">Permissions</TabsTrigger>
-              <TabsTrigger value="environment">Environment</TabsTrigger>
-              <TabsTrigger value="advanced">Advanced</TabsTrigger>
-              <TabsTrigger value="hooks">Hooks</TabsTrigger>
-              <TabsTrigger value="commands">Commands</TabsTrigger>
-              <TabsTrigger value="storage">Storage</TabsTrigger>
-              <TabsTrigger value="proxy">Proxy</TabsTrigger>
-              <TabsTrigger value="analytics">Analytics</TabsTrigger>
+              <TabsTrigger value="general">通用</TabsTrigger>
+              <TabsTrigger value="permissions">权限</TabsTrigger>
+              <TabsTrigger value="environment">环境</TabsTrigger>
+              <TabsTrigger value="advanced">高级</TabsTrigger>
+              <TabsTrigger value="hooks">钩子</TabsTrigger>
+              <TabsTrigger value="commands">命令</TabsTrigger>
+              <TabsTrigger value="storage">存储</TabsTrigger>
+              <TabsTrigger value="proxy">代理</TabsTrigger>
+              <TabsTrigger value="analytics">分析</TabsTrigger>
             </TabsList>
             
             {/* General Settings */}
             <TabsContent value="general" className="space-y-6">
               <Card className="p-6 space-y-6">
                 <div>
-                  <h3 className="text-base font-semibold mb-4">General Settings</h3>
+                  <h3 className="text-base font-semibold mb-4">通用设置</h3>
                   
                   <div className="space-y-4">
                     {/* Theme Selector */}
                     <div className="space-y-2">
-                      <Label htmlFor="theme">Theme</Label>
+                      <Label htmlFor="theme">主题</Label>
                       <Select
                         value={theme}
                         onValueChange={(value) => setTheme(value as any)}
                       >
                         <SelectTrigger id="theme" className="w-full">
-                          <SelectValue placeholder="Select a theme" />
+                          <SelectValue placeholder="选择主题" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="dark">Dark</SelectItem>
-                          <SelectItem value="gray">Gray</SelectItem>
-                          <SelectItem value="light">Light</SelectItem>
-                          <SelectItem value="custom">Custom</SelectItem>
+                          <SelectItem value="dark">深色</SelectItem>
+                          <SelectItem value="gray">灰色</SelectItem>
+                          <SelectItem value="light">浅色</SelectItem>
+                          <SelectItem value="custom">自定义</SelectItem>
                         </SelectContent>
                       </Select>
                       <p className="text-xs text-muted-foreground">
-                        Choose your preferred color theme for the interface
+                        为界面选择您喜欢的颜色主题
                       </p>
                     </div>
                     
                     {/* Custom Color Editor */}
                     {theme === 'custom' && (
                       <div className="space-y-4 p-4 border rounded-lg bg-muted/20">
-                        <h4 className="text-sm font-medium">Custom Theme Colors</h4>
+                        <h4 className="text-sm font-medium">自定义主题颜色</h4>
                         
                         <div className="grid grid-cols-2 gap-4">
                           {/* Background Color */}
                           <div className="space-y-2">
-                            <Label htmlFor="color-background" className="text-xs">Background</Label>
+                            <Label htmlFor="color-background" className="text-xs">背景</Label>
                             <div className="flex gap-2">
                               <Input
                                 id="color-background"
@@ -465,7 +465,7 @@ export const Settings: React.FC<SettingsProps> = ({
                           
                           {/* Foreground Color */}
                           <div className="space-y-2">
-                            <Label htmlFor="color-foreground" className="text-xs">Foreground</Label>
+                            <Label htmlFor="color-foreground" className="text-xs">前景</Label>
                             <div className="flex gap-2">
                               <Input
                                 id="color-foreground"
@@ -484,7 +484,7 @@ export const Settings: React.FC<SettingsProps> = ({
                           
                           {/* Primary Color */}
                           <div className="space-y-2">
-                            <Label htmlFor="color-primary" className="text-xs">Primary</Label>
+                            <Label htmlFor="color-primary" className="text-xs">主色</Label>
                             <div className="flex gap-2">
                               <Input
                                 id="color-primary"
@@ -503,7 +503,7 @@ export const Settings: React.FC<SettingsProps> = ({
                           
                           {/* Card Color */}
                           <div className="space-y-2">
-                            <Label htmlFor="color-card" className="text-xs">Card</Label>
+                            <Label htmlFor="color-card" className="text-xs">卡片</Label>
                             <div className="flex gap-2">
                               <Input
                                 id="color-card"
@@ -522,7 +522,7 @@ export const Settings: React.FC<SettingsProps> = ({
                           
                           {/* Accent Color */}
                           <div className="space-y-2">
-                            <Label htmlFor="color-accent" className="text-xs">Accent</Label>
+                            <Label htmlFor="color-accent" className="text-xs">强调色</Label>
                             <div className="flex gap-2">
                               <Input
                                 id="color-accent"
@@ -541,7 +541,7 @@ export const Settings: React.FC<SettingsProps> = ({
                           
                           {/* Destructive Color */}
                           <div className="space-y-2">
-                            <Label htmlFor="color-destructive" className="text-xs">Destructive</Label>
+                            <Label htmlFor="color-destructive" className="text-xs">破坏性色</Label>
                             <div className="flex gap-2">
                               <Input
                                 id="color-destructive"
@@ -560,7 +560,7 @@ export const Settings: React.FC<SettingsProps> = ({
                         </div>
                         
                         <p className="text-xs text-muted-foreground">
-                          Use CSS color values (hex, rgb, oklch, etc.). Changes apply immediately.
+                          使用 CSS 颜色值（hex、rgb、oklch 等）。更改立即生效。
                         </p>
                       </div>
                     )}
@@ -568,9 +568,9 @@ export const Settings: React.FC<SettingsProps> = ({
                     {/* Include Co-authored By */}
                     <div className="flex items-center justify-between">
                       <div className="space-y-0.5 flex-1">
-                        <Label htmlFor="coauthored">Include "Co-authored by Claude"</Label>
+                        <Label htmlFor="coauthored">包含“由Claude协作”</Label>
                         <p className="text-xs text-muted-foreground">
-                          Add Claude attribution to git commits and pull requests
+                          在 git 提交和拉取请求中添加 Claude 归属
                         </p>
                       </div>
                       <Switch
@@ -583,9 +583,9 @@ export const Settings: React.FC<SettingsProps> = ({
                     {/* Verbose Output */}
                     <div className="flex items-center justify-between">
                       <div className="space-y-0.5 flex-1">
-                        <Label htmlFor="verbose">Verbose Output</Label>
+                        <Label htmlFor="verbose">详细输出</Label>
                         <p className="text-xs text-muted-foreground">
-                          Show full bash and command outputs
+                          显示完整的 bash 和命令输出
                         </p>
                       </div>
                       <Switch
@@ -597,7 +597,7 @@ export const Settings: React.FC<SettingsProps> = ({
                     
                     {/* Cleanup Period */}
                     <div className="space-y-2">
-                      <Label htmlFor="cleanup">Chat Transcript Retention (days)</Label>
+                      <Label htmlFor="cleanup">聊天记录保留（天）</Label>
                       <Input
                         id="cleanup"
                         type="number"
@@ -610,16 +610,16 @@ export const Settings: React.FC<SettingsProps> = ({
                         }}
                       />
                       <p className="text-xs text-muted-foreground">
-                        How long to retain chat transcripts locally (default: 30 days)
+                        本地保留聊天记录的时间（默认：30天）
                       </p>
                     </div>
                     
                     {/* Claude Binary Path Selector */}
                     <div className="space-y-4">
                       <div>
-                        <Label className="text-sm font-medium mb-2 block">Claude Code Installation</Label>
+                        <Label className="text-sm font-medium mb-2 block">Claude Code 安装</Label>
                         <p className="text-xs text-muted-foreground mb-4">
-                          Select which Claude Code installation to use.
+                          选择要使用的 Claude Code 安装。
                         </p>
                       </div>
                       <ClaudeVersionSelector
@@ -628,7 +628,7 @@ export const Settings: React.FC<SettingsProps> = ({
                       />
                       {binaryPathChanged && (
                         <p className="text-xs text-amber-600 dark:text-amber-400">
-                          ⚠️ Claude binary path has been changed. Remember to save your settings.
+                          ⚠️ Claude 二进制路径已更改。请记得保存您的设置。
                         </p>
                       )}
                     </div>
@@ -642,16 +642,16 @@ export const Settings: React.FC<SettingsProps> = ({
               <Card className="p-6">
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-base font-semibold mb-2">Permission Rules</h3>
+                    <h3 className="text-base font-semibold mb-2">权限规则</h3>
                     <p className="text-sm text-muted-foreground mb-4">
-                      Control which tools Claude Code can use without manual approval
+                      控制 Claude Code 可以在无需手动批准的情况下使用的工具
                     </p>
                   </div>
                   
                   {/* Allow Rules */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <Label className="text-sm font-medium text-green-500">Allow Rules</Label>
+                      <Label className="text-sm font-medium text-green-500">允许规则</Label>
                       <Button
                         variant="outline"
                         size="sm"
@@ -659,13 +659,13 @@ export const Settings: React.FC<SettingsProps> = ({
                         className="gap-2 hover:border-green-500/50 hover:text-green-500"
                       >
                         <Plus className="h-3 w-3" />
-                        Add Rule
+                        添加规则
                       </Button>
                     </div>
                     <div className="space-y-2">
                       {allowRules.length === 0 ? (
                         <p className="text-xs text-muted-foreground py-2">
-                          No allow rules configured. Claude will ask for approval for all tools.
+                          未配置允许规则。Claude 会对所有工具请求批准。
                         </p>
                       ) : (
                         allowRules.map((rule) => (
@@ -698,7 +698,7 @@ export const Settings: React.FC<SettingsProps> = ({
                   {/* Deny Rules */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <Label className="text-sm font-medium text-red-500">Deny Rules</Label>
+                      <Label className="text-sm font-medium text-red-500">拒绝规则</Label>
                       <Button
                         variant="outline"
                         size="sm"
@@ -706,13 +706,13 @@ export const Settings: React.FC<SettingsProps> = ({
                         className="gap-2 hover:border-red-500/50 hover:text-red-500"
                       >
                         <Plus className="h-3 w-3" />
-                        Add Rule
+                        添加规则
                       </Button>
                     </div>
                     <div className="space-y-2">
                       {denyRules.length === 0 ? (
                         <p className="text-xs text-muted-foreground py-2">
-                          No deny rules configured.
+                          未配置拒绝规则。
                         </p>
                       ) : (
                         denyRules.map((rule) => (
@@ -744,14 +744,14 @@ export const Settings: React.FC<SettingsProps> = ({
                   
                   <div className="pt-2 space-y-2">
                     <p className="text-xs text-muted-foreground">
-                      <strong>Examples:</strong>
+                      <strong>示例：</strong>
                     </p>
                     <ul className="text-xs text-muted-foreground space-y-1 ml-4">
-                      <li>• <code className="px-1 py-0.5 rounded bg-green-500/10 text-green-600 dark:text-green-400">Bash</code> - Allow all bash commands</li>
-                      <li>• <code className="px-1 py-0.5 rounded bg-green-500/10 text-green-600 dark:text-green-400">Bash(npm run build)</code> - Allow exact command</li>
-                      <li>• <code className="px-1 py-0.5 rounded bg-green-500/10 text-green-600 dark:text-green-400">Bash(npm run test:*)</code> - Allow commands with prefix</li>
-                      <li>• <code className="px-1 py-0.5 rounded bg-green-500/10 text-green-600 dark:text-green-400">Read(~/.zshrc)</code> - Allow reading specific file</li>
-                      <li>• <code className="px-1 py-0.5 rounded bg-green-500/10 text-green-600 dark:text-green-400">Edit(docs/**)</code> - Allow editing files in docs directory</li>
+                      <li>• <code className="px-1 py-0.5 rounded bg-green-500/10 text-green-600 dark:text-green-400">Bash</code> - 允许所有 bash 命令</li>
+                      <li>• <code className="px-1 py-0.5 rounded bg-green-500/10 text-green-600 dark:text-green-400">Bash(npm run build)</code> - 允许精确命令</li>
+                      <li>• <code className="px-1 py-0.5 rounded bg-green-500/10 text-green-600 dark:text-green-400">Bash(npm run test:*)</code> - 允许带有前缀的命令</li>
+                      <li>• <code className="px-1 py-0.5 rounded bg-green-500/10 text-green-600 dark:text-green-400">Read(~/.zshrc)</code> - 允许读取特定文件</li>
+                      <li>• <code className="px-1 py-0.5 rounded bg-green-500/10 text-green-600 dark:text-green-400">Edit(docs/**)</code> - 允许编辑 docs 目录中的文件</li>
                     </ul>
                   </div>
                 </div>
@@ -764,9 +764,9 @@ export const Settings: React.FC<SettingsProps> = ({
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-base font-semibold">Environment Variables</h3>
+                      <h3 className="text-base font-semibold">环境变量</h3>
                       <p className="text-sm text-muted-foreground mt-1">
-                        Environment variables applied to every Claude Code session
+                        应用于每个 Claude Code 会话的环境变量
                       </p>
                     </div>
                     <Button
@@ -776,14 +776,14 @@ export const Settings: React.FC<SettingsProps> = ({
                       className="gap-2"
                     >
                       <Plus className="h-3 w-3" />
-                      Add Variable
+                      添加变量
                     </Button>
                   </div>
                   
                   <div className="space-y-3">
                     {envVars.length === 0 ? (
                       <p className="text-xs text-muted-foreground py-2">
-                        No environment variables configured.
+                        未配置环境变量。
                       </p>
                     ) : (
                       envVars.map((envVar) => (
@@ -821,12 +821,12 @@ export const Settings: React.FC<SettingsProps> = ({
                   
                   <div className="pt-2 space-y-2">
                     <p className="text-xs text-muted-foreground">
-                      <strong>Common variables:</strong>
+                      <strong>常见变量：</strong>
                     </p>
                     <ul className="text-xs text-muted-foreground space-y-1 ml-4">
-                      <li>• <code className="px-1 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400">CLAUDE_CODE_ENABLE_TELEMETRY</code> - Enable/disable telemetry (0 or 1)</li>
-                      <li>• <code className="px-1 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400">ANTHROPIC_MODEL</code> - Custom model name</li>
-                      <li>• <code className="px-1 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400">DISABLE_COST_WARNINGS</code> - Disable cost warnings (1)</li>
+                      <li>• <code className="px-1 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400">CLAUDE_CODE_ENABLE_TELEMETRY</code> - 启用/禁用遥测（0 或1）</li>
+                      <li>• <code className="px-1 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400">ANTHROPIC_MODEL</code> - 自定义模型名称</li>
+                      <li>• <code className="px-1 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400">DISABLE_COST_WARNINGS</code> - 禁用成本警告（1）</li>
                     </ul>
                   </div>
                 </div>
@@ -837,15 +837,15 @@ export const Settings: React.FC<SettingsProps> = ({
               <Card className="p-6">
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-base font-semibold mb-4">Advanced Settings</h3>
+                    <h3 className="text-base font-semibold mb-4">高级设置</h3>
                     <p className="text-sm text-muted-foreground mb-6">
-                      Additional configuration options for advanced users
+                      为高级用户提供的额外配置选项
                     </p>
                   </div>
                   
                   {/* API Key Helper */}
                   <div className="space-y-2">
-                    <Label htmlFor="apiKeyHelper">API Key Helper Script</Label>
+                    <Label htmlFor="apiKeyHelper">API 密钥助手脚本</Label>
                     <Input
                       id="apiKeyHelper"
                       placeholder="/path/to/generate_api_key.sh"
@@ -853,18 +853,18 @@ export const Settings: React.FC<SettingsProps> = ({
                       onChange={(e) => updateSetting("apiKeyHelper", e.target.value || undefined)}
                     />
                     <p className="text-xs text-muted-foreground">
-                      Custom script to generate auth values for API requests
+                      用于为 API 请求生成身份验证值的自定义脚本
                     </p>
                   </div>
                   
                   {/* Raw JSON Editor */}
                   <div className="space-y-2">
-                    <Label>Raw Settings (JSON)</Label>
+                    <Label>原始设置（JSON）</Label>
                     <div className="p-3 rounded-md bg-muted font-mono text-xs overflow-x-auto whitespace-pre-wrap">
                       <pre>{JSON.stringify(settings, null, 2)}</pre>
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      This shows the raw JSON that will be saved to ~/.claude/settings.json
+                      这里显示将保存到 ~/.claude/settings.json 的原始JSON
                     </p>
                   </div>
                 </div>
@@ -876,9 +876,9 @@ export const Settings: React.FC<SettingsProps> = ({
               <Card className="p-6">
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-base font-semibold mb-2">User Hooks</h3>
+                    <h3 className="text-base font-semibold mb-2">用户钩子</h3>
                     <p className="text-sm text-muted-foreground mb-4">
-                      Configure hooks that apply to all Claude Code sessions for your user account.
+                      配置适用于您用户账户所有 Claude Code 会话的钩子。
                       These are stored in <code className="mx-1 px-2 py-1 bg-muted rounded text-xs">~/.claude/settings.json</code>
                     </p>
                   </div>
@@ -928,16 +928,16 @@ export const Settings: React.FC<SettingsProps> = ({
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <BarChart3 className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-                    <h3 className="text-base font-semibold">Analytics Settings</h3>
+                    <h3 className="text-base font-semibold">分析设置</h3>
                   </div>
                   
                   <div className="space-y-6">
                     {/* Analytics Toggle */}
                     <div className="flex items-center justify-between">
                       <div className="space-y-1">
-                        <Label htmlFor="analytics-enabled" className="text-base">Enable Analytics</Label>
+                        <Label htmlFor="analytics-enabled" className="text-base">启用分析</Label>
                         <p className="text-sm text-muted-foreground">
-                          Help improve Claudia by sharing anonymous usage data
+                          通过共享匿名使用数据帮助改进 Claudia
                         </p>
                       </div>
                       <Switch
@@ -950,12 +950,12 @@ export const Settings: React.FC<SettingsProps> = ({
                             await analytics.enable();
                             setAnalyticsEnabled(true);
                             trackEvent.settingsChanged('analytics_enabled', true);
-                            setToast({ message: "Analytics enabled", type: "success" });
+                            setToast({ message: "分析已启用", type: "success" });
                           } else {
                             await analytics.disable();
                             setAnalyticsEnabled(false);
                             trackEvent.settingsChanged('analytics_enabled', false);
-                            setToast({ message: "Analytics disabled", type: "success" });
+                            setToast({ message: "分析已禁用", type: "success" });
                           }
                         }}
                       />
@@ -966,12 +966,12 @@ export const Settings: React.FC<SettingsProps> = ({
                       <div className="flex gap-3">
                         <Shield className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
                         <div className="space-y-2">
-                          <p className="font-medium text-blue-900 dark:text-blue-100">Your privacy is protected</p>
+                          <p className="font-medium text-blue-900 dark:text-blue-100">您的隐私受到保护</p>
                           <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
-                            <li>• No personal information is collected</li>
-                            <li>• No file contents, paths, or project names</li>
-                            <li>• All data is anonymous with random IDs</li>
-                            <li>• You can disable analytics at any time</li>
+                            <li>• 不收集个人信息</li>
+                            <li>• 不收集文件内容、路径或项目名称</li>
+                            <li>• 所有数据都是匿名的，使用随机ID</li>
+                            <li>• 您可以随时禁用分析</li>
                           </ul>
                         </div>
                       </div>
@@ -981,12 +981,12 @@ export const Settings: React.FC<SettingsProps> = ({
                     {analyticsEnabled && (
                       <div className="space-y-4">
                         <div>
-                          <h4 className="text-sm font-medium mb-2">What we collect:</h4>
+                          <h4 className="text-sm font-medium mb-2">我们收集的内容：</h4>
                           <ul className="text-sm text-muted-foreground space-y-1">
-                            <li>• Feature usage patterns</li>
-                            <li>• Performance metrics</li>
-                            <li>• Error reports (without sensitive data)</li>
-                            <li>• Session frequency and duration</li>
+                            <li>• 功能使用模式</li>
+                            <li>• 性能指标</li>
+                            <li>• 错误报告（不包含敏感数据）</li>
+                            <li>• 会话频率和持续时间</li>
                           </ul>
                         </div>
                         
@@ -999,11 +999,11 @@ export const Settings: React.FC<SettingsProps> = ({
                               await analytics.deleteAllData();
                               setAnalyticsEnabled(false);
                               setAnalyticsConsented(false);
-                              setToast({ message: "All analytics data deleted", type: "success" });
+                              setToast({ message: "所有分析数据已删除", type: "success" });
                             }}
                           >
                             <Trash className="mr-2 h-4 w-4" />
-                            Delete All Analytics Data
+                            删除所有分析数据
                           </Button>
                         </div>
                       </div>

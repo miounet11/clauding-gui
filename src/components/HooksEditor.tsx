@@ -794,7 +794,7 @@ export const HooksEditor: React.FC<HooksEditorProps> = ({
             </p>
             {hasUnsavedChanges && !readOnly && (
               <p className="text-sm text-amber-600">
-                You have unsaved changes. Click Save to persist them.
+                您有未保存的更改。点击保存以持久化它们。
               </p>
             )}
           </div>
