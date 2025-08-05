@@ -965,6 +965,29 @@ export const api = {
   },
 
   /**
+   * Loads session history with pagination support
+   */
+  async loadSessionHistoryPaginated(
+    sessionId: string, 
+    projectId: string, 
+    offset: number, 
+    limit: number
+  ): Promise<{ messages: any[], totalCount: number }> {
+    const [messages, totalCount] = await invoke<[any[], number]>(
+      "load_session_history_paginated", 
+      { sessionId, projectId, offset, limit }
+    );
+    return { messages, totalCount };
+  },
+
+  /**
+   * Get the total message count for a session without loading all messages
+   */
+  async getSessionMessageCount(sessionId: string, projectId: string): Promise<number> {
+    return invoke("get_session_message_count", { sessionId, projectId });
+  },
+
+  /**
    * Loads the JSONL history for a specific agent session
    * Similar to loadSessionHistory but searches across all project directories
    * @param sessionId - The session ID (UUID)

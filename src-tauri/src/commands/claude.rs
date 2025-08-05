@@ -1,7 +1,7 @@
 use anyhow::{Context, Result};
 use serde::{Deserialize, Serialize};
 use std::fs;
-use std::io::{BufRead, BufReader};
+use std::io::{BufRead, BufReader, Read};
 use std::path::PathBuf;
 use std::process::Stdio;
 use std::sync::Arc;
@@ -2059,4 +2059,106 @@ pub async fn validate_hook_command(command: String) -> Result<serde_json::Value,
         }
         Err(e) => Err(format!("Failed to validate command: {}", e))
     }
+}
+
+/// Loads session history with pagination support
+#[tauri::command]
+pub async fn load_session_history_paginated(
+    session_id: String,
+    project_id: String,
+    offset: usize,
+    limit: usize,
+) -> Result<(Vec<serde_json::Value>, usize), String> {
+    log::info!(
+        "Loading paginated session history for session: {} (offset: {}, limit: {})",
+        session_id,
+        offset,
+        limit
+    );
+    
+    let claude_dir = get_claude_dir().map_err(|e| e.to_string())?;
+    let session_path = claude_dir
+        .join("projects")
+        .join(&project_id)
+        .join(format!("{}.jsonl", session_id));
+    
+    if !session_path.exists() {
+        return Err(format!("Session file not found: {}", session_id));
+    }
+    
+    let file = fs::File::open(&session_path)
+        .map_err(|e| format!("Failed to open session file: {}", e))?;
+    let reader = BufReader::new(file);
+    
+    let mut messages = Vec::new();
+    let mut total_count = 0;
+    let mut current_index = 0;
+    
+    for line in reader.lines() {
+        if let Ok(line) = line {
+            if let Ok(json) = serde_json::from_str::<serde_json::Value>(&line) {
+                total_count += 1;
+                
+                // Only collect messages within the requested range
+                if current_index >= offset && messages.len() < limit {
+                    messages.push(json);
+                }
+                current_index += 1;
+                
+                // If we've collected enough messages, we can stop early
+                if messages.len() >= limit && current_index > offset + limit {
+                    // Continue counting to get total_count
+                    continue;
+                }
+            }
+        }
+    }
+    
+    Ok((messages, total_count))
+}
+
+/// Get the total message count for a session without loading all messages
+#[tauri::command]
+pub async fn get_session_message_count(
+    session_id: String,
+    project_id: String,
+) -> Result<usize, String> {
+    log::info!(
+        "Getting message count for session: {} in project: {}",
+        session_id,
+        project_id
+    );
+    
+    let claude_dir = get_claude_dir().map_err(|e| e.to_string())?;
+    let session_path = claude_dir
+        .join("projects")
+        .join(&project_id)
+        .join(format!("{}.jsonl", session_id));
+    
+    if !session_path.exists() {
+        return Err(format!("Session file not found: {}", session_id));
+    }
+    
+    // 使用更高效的方式计算行数
+    let file = fs::File::open(&session_path)
+        .map_err(|e| format!("Failed to open session file: {}", e))?;
+    let mut reader = BufReader::with_capacity(8192, file); // 使用更大的缓冲区
+    
+    let mut count = 0;
+    let mut buffer = Vec::new();
+    
+    loop {
+        buffer.clear();
+        let bytes_read = reader.read_until(b'\n', &mut buffer)
+            .map_err(|e| format!("Failed to read file: {}", e))?;
+        
+        if bytes_read == 0 {
+            break;
+        }
+        
+        // 只计数，不解析JSON
+        count += 1;
+    }
+    
+    Ok(count)
 }

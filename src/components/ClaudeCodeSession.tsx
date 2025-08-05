@@ -293,22 +293,60 @@ export const ClaudeCodeSession: React.FC<ClaudeCodeSessionProps> = ({
       setIsLoading(true);
       setError(null);
       
-      const history = await api.loadSessionHistory(session.id, session.project_id);
+      // 首先获取消息总数
+      const messageCount = await api.getSessionMessageCount(session.id, session.project_id);
+      console.log(`[ClaudeCodeSession] Session has ${messageCount} messages`);
       
-      // Convert history to messages format
-      const loadedMessages: ClaudeStreamMessage[] = history.map(entry => ({
-        ...entry,
-        type: entry.type || "assistant"
-      }));
-      
-      setMessages(loadedMessages);
-      setRawJsonlOutput(history.map(h => JSON.stringify(h)));
+      // 如果消息数量很大，使用分页加载
+      if (messageCount > 1000) {
+        // 加载最后1000条消息
+        const offset = Math.max(0, messageCount - 1000);
+        const { messages: history } = await api.loadSessionHistoryPaginated(
+          session.id, 
+          session.project_id, 
+          offset, 
+          1000
+        );
+        
+        // Convert history to messages format
+        const loadedMessages: ClaudeStreamMessage[] = history.map(entry => ({
+          ...entry,
+          type: entry.type || "assistant"
+        }));
+        
+        setMessages(loadedMessages);
+        setRawJsonlOutput(history.map(h => JSON.stringify(h)));
+        
+        // 显示提示信息
+        const skippedCount = offset;
+        if (skippedCount > 0) {
+          const systemMessage: ClaudeStreamMessage = {
+            type: "system",
+            subtype: "info",
+            result: `已加载最近的 1000 条消息（跳过了前 ${skippedCount} 条较早的消息）`,
+            timestamp: new Date().toISOString()
+          };
+          setMessages(prev => [systemMessage, ...prev]);
+        }
+      } else {
+        // 消息数量不多，加载全部
+        const history = await api.loadSessionHistory(session.id, session.project_id);
+        
+        // Convert history to messages format
+        const loadedMessages: ClaudeStreamMessage[] = history.map(entry => ({
+          ...entry,
+          type: entry.type || "assistant"
+        }));
+        
+        setMessages(loadedMessages);
+        setRawJsonlOutput(history.map(h => JSON.stringify(h)));
+      }
       
       // After loading history, we're continuing a conversation
       setIsFirstPrompt(false);
     } catch (err) {
       console.error("Failed to load session history:", err);
-      setError("Failed to load session history");
+      setError("加载会话历史失败");
     } finally {
       setIsLoading(false);
     }
