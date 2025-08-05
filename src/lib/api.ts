@@ -576,6 +576,19 @@ export const api = {
   },
 
   /**
+   * Test Claude CLI connectivity
+   * @returns Promise resolving to the test result
+   */
+  async testClaudeConnectivity(): Promise<string> {
+    try {
+      return await invoke<string>("test_claude_connectivity");
+    } catch (error) {
+      console.error("Failed to test Claude connectivity:", error);
+      throw error;
+    }
+  },
+
+  /**
    * Saves the CLAUDE.md system prompt file
    * @param content - The new content for the system prompt
    * @returns Promise resolving when the file is saved

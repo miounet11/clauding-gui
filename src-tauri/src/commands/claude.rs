@@ -546,6 +546,56 @@ pub async fn get_system_prompt() -> Result<String, String> {
     fs::read_to_string(&claude_md_path).map_err(|e| format!("Failed to read CLAUDE.md: {}", e))
 }
 
+/// Test Claude CLI connectivity by running a simple command
+#[tauri::command]
+pub async fn test_claude_connectivity(app: AppHandle) -> Result<String, String> {
+    log::info!("Testing Claude CLI connectivity");
+    let claude_path = find_claude_binary(&app)?;
+    
+    // Create a simple test command
+    let mut cmd = create_command_with_env(&claude_path);
+    cmd.arg("-p")
+       .arg("hello")
+       .arg("--model")
+       .arg("claude-sonnet-4-20250514")
+       .current_dir("/tmp")
+       .stdout(Stdio::piped())
+       .stderr(Stdio::piped());
+       
+    // Log the command being executed
+    log::info!("Test command: {} -p hello --model claude-sonnet-4-20250514", claude_path);
+    
+    #[cfg(debug_assertions)]
+    {
+        match cmd.output() {
+            Ok(output) => {
+                let stdout = String::from_utf8_lossy(&output.stdout);
+                let stderr = String::from_utf8_lossy(&output.stderr);
+                let success = output.status.success();
+                
+                log::info!("Claude test - Success: {}", success);
+                log::info!("Claude test - Stdout: {}", stdout);
+                log::info!("Claude test - Stderr: {}", stderr);
+                
+                if success {
+                    Ok(format!("连接成功!\n输出: {}", stdout))
+                } else {
+                    Err(format!("连接失败!\n错误: {}", stderr))
+                }
+            }
+            Err(e) => {
+                log::error!("Failed to execute Claude test: {}", e);
+                Err(format!("无法执行 Claude 命令: {}", e))
+            }
+        }
+    }
+    
+    #[cfg(not(debug_assertions))]
+    {
+        Ok("连接测试仅在调试模式下可用".to_string())
+    }
+}
+
 /// Checks if Claude Code is installed and gets its version
 #[tauri::command]
 pub async fn check_claude_version(app: AppHandle) -> Result<ClaudeVersionStatus, String> {
