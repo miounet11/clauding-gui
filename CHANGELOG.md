@@ -2,6 +2,22 @@
 
 所有重要的更改都将记录在此文件中。
 
+## [2.0.9] - 2025-08-05
+
+### 🐛 Bug 修复
+
+- **修复 Claude API 连接错误**
+  - ✅ 修复了在 Clauding GUI 中运行时出现 "API Error: Connection error" 的问题
+  - ✅ 添加 ANTHROPIC_API_KEY 环境变量传递，确保 Claude CLI 可以正确认证
+  - ✅ 添加所有 CLAUDE_ 前缀的环境变量传递
+  - ✅ 确保代理环境变量（HTTP_PROXY、HTTPS_PROXY 等）正确传递
+  - ✅ 修复了环境变量白名单，避免关键配置丢失
+
+### 🔧 技术改进
+
+- 改进了 `create_command_with_env` 函数，确保所有必要的环境变量都能传递给子进程
+- 同时修复了标准库和 Tokio 命令创建函数中的环境变量处理
+
 ## [2.0.8] - 2025-08-05
 
 ### ⚡ 性能优化
