@@ -1,142 +1,142 @@
-# 🤖 Claudia CC Agents
+# 🤖 Claudia CC 代理
 
 <div align="center">
   <p>
-    <strong>Pre-built AI agents for Claudia powered by Claude Code</strong>
+    <strong>为 Claudia 预构建的 AI 代理，由 Claude Code 驱动</strong>
   </p>
   <p>
-    <a href="#available-agents">Browse Agents</a> •
-    <a href="#importing-agents">Import Guide</a> •
-    <a href="#exporting-agents">Export Guide</a> •
-    <a href="#contributing">Contribute</a>
+    <a href="#可用代理">浏览代理</a> •
+    <a href="#导入代理">导入指南</a> •
+    <a href="#导出代理">导出指南</a> •
+    <a href="#贡献">贡献</a>
   </p>
 </div>
 
 ---
 
-## 📦 Available Agents
+## 📦 可用代理
 
-| Agent | Model | Description | Default Task |
+| 代理 | 模型 | 描述 | 默认任务 |
 |-------|-------|-------------|--------------|
-| **🎯 Git Commit Bot**<br/>🤖 `bot` | <img src="https://img.shields.io/badge/Sonnet-blue?style=flat-square" alt="Sonnet"> | **Automate your Git workflow with intelligent commit messages**<br/><br/>Analyzes Git repository changes, generates detailed commit messages following Conventional Commits specification, and pushes changes to remote repository. | "Push all changes." |
-| **🛡️ Security Scanner**<br/>🛡️ `shield` | <img src="https://img.shields.io/badge/Opus-purple?style=flat-square" alt="Opus"> | **Advanced AI-powered Static Application Security Testing (SAST)**<br/><br/>Performs comprehensive security audits by spawning specialized sub-agents for: codebase intelligence gathering, threat modeling (STRIDE), vulnerability scanning (OWASP Top 10, CWE), exploit validation, remediation design, and professional report generation. | "Review the codebase for security issues." |
-| **🧪 Unit Tests Bot**<br/>💻 `code` | <img src="https://img.shields.io/badge/Opus-purple?style=flat-square" alt="Opus"> | **Automated comprehensive unit test generation for any codebase**<br/><br/>Analyzes codebase and generates comprehensive unit tests by: analyzing code structure, creating test plans, writing tests matching your style, verifying execution, optimizing coverage (>80% overall, 100% critical paths), and generating documentation. | "Generate unit tests for this codebase." |
+| **🎯 Git 提交机器人**<br/>🤖 `bot` | <img src="https://img.shields.io/badge/Sonnet-blue?style=flat-square" alt="Sonnet"> | **使用智能提交消息自动化您的 Git 工作流**<br/><br/>分析 Git 仓库更改，生成遵循 Conventional Commits 规范的详细提交消息，并将更改推送到远程仓库。 | "推送所有更改。" |
+| **🛡️ 安全扫描器**<br/>🛡️ `shield` | <img src="https://img.shields.io/badge/Opus-purple?style=flat-square" alt="Opus"> | **高级 AI 驱动的静态应用安全测试 (SAST)**<br/><br/>通过生成专门的子代理执行全面的安全审计：代码库智能收集、威胁建模 (STRIDE)、漏洞扫描 (OWASP Top 10, CWE)、漏洞利用验证、修复设计和专业报告生成。 | "审查代码库的安全问题。" |
+| **🧪 单元测试机器人**<br/>💻 `code` | <img src="https://img.shields.io/badge/Opus-purple?style=flat-square" alt="Opus"> | **为任何代码库自动生成全面的单元测试**<br/><br/>分析代码库并生成全面的单元测试：分析代码结构、创建测试计划、编写符合您风格的测试、验证执行、优化覆盖率（总体 >80%，关键路径 100%）并生成文档。 | "为此代码库生成单元测试。" |
 
-### Available Icons
+### 可用图标
 
-Choose from these icon options when creating agents:
-- `bot` - 🤖 General purpose
-- `shield` - 🛡️ Security related
-- `code` - 💻 Development
-- `terminal` - 🖥️ System/CLI
-- `database` - 🗄️ Data operations
-- `globe` - 🌐 Network/Web
-- `file-text` - 📄 Documentation
-- `git-branch` - 🌿 Version control
+创建代理时可以选择这些图标选项：
+- `bot` - 🤖 通用
+- `shield` - 🛡️ 安全相关
+- `code` - 💻 开发
+- `terminal` - 🖥️ 系统/CLI
+- `database` - 🗄️ 数据操作
+- `globe` - 🌐 网络/Web
+- `file-text` - 📄 文档
+- `git-branch` - 🌿 版本控制
 
 ---
 
-## 📥 Importing Agents
+## 📥 导入代理
 
-### Method 1: Import from GitHub (Recommended)
+### 方法 1：从 GitHub 导入（推荐）
 
-1. In Claudia, navigate to **CC Agents**
-2. Click the **Import** dropdown button
-3. Select **From GitHub**
-4. Browse available agents from the official repository
-5. Preview agent details and click **Import Agent**
+1. 在 Claudia 中，导航到 **CC 代理**
+2. 点击 **导入** 下拉按钮
+3. 选择 **从 GitHub**
+4. 从官方仓库浏览可用代理
+5. 预览代理详情并点击 **导入代理**
 
-### Method 2: Import from Local File
+### 方法 2：从本地文件导入
 
-1. Download a `.claudia.json` file from this repository
-2. In Claudia, navigate to **CC Agents**
-3. Click the **Import** dropdown button
-4. Select **From File**
-5. Choose the downloaded `.claudia.json` file
+1. 从此仓库下载 `.claudia.json` 文件
+2. 在 Claudia 中，导航到 **CC 代理**
+3. 点击 **导入** 下拉按钮
+4. 选择 **从文件**
+5. 选择下载的 `.claudia.json` 文件
 
-## 📤 Exporting Agents
+## 📤 导出代理
 
-### Export Your Custom Agents
+### 导出您的自定义代理
 
-1. In Claudia, navigate to **CC Agents**
-2. Find your agent in the grid
-3. Click the **Export** button
-4. Choose where to save the `.claudia.json` file
+1. 在 Claudia 中，导航到 **CC 代理**
+2. 在网格中找到您的代理
+3. 点击 **导出** 按钮
+4. 选择保存 `.claudia.json` 文件的位置
 
-### Agent File Format
+### 代理文件格式
 
-All agents are stored in `.claudia.json` format with the following structure:
+所有代理都以 `.claudia.json` 格式存储，具有以下结构：
 
 ```json
 {
   "version": 1,
   "exported_at": "2025-01-23T14:29:58.156063+00:00",
   "agent": {
-    "name": "Your Agent Name",
+    "name": "您的代理名称",
     "icon": "bot",
     "model": "opus|sonnet|haiku",
-    "system_prompt": "Your agent's instructions...",
-    "default_task": "Default task description"
+    "system_prompt": "您的代理指令...",
+    "default_task": "默认任务描述"
   }
 }
 ```
 
-## 🔧 Technical Implementation
+## 🔧 技术实现
 
-### How Import/Export Works
+### 导入/导出如何工作
 
-The agent import/export system is built on a robust architecture:
+代理导入/导出系统建立在强大的架构之上：
 
-#### Backend (Rust/Tauri)
-- **Storage**: SQLite database stores agent configurations
-- **Export**: Serializes agent data to JSON with version control
-- **Import**: Validates and deduplicates agents on import
-- **GitHub Integration**: Fetches agents via GitHub API
+#### 后端 (Rust/Tauri)
+- **存储**：SQLite 数据库存储代理配置
+- **导出**：将代理数据序列化为带版本控制的 JSON
+- **导入**：在导入时验证和去重代理
+- **GitHub 集成**：通过 GitHub API 获取代理
 
-#### Frontend (React/TypeScript)
-- **UI Components**: 
-  - `CCAgents.tsx` - Main agent management interface
-  - `GitHubAgentBrowser.tsx` - GitHub repository browser
-  - `CreateAgent.tsx` - Agent creation/editing form
-- **File Operations**: Native file dialogs for import/export
-- **Real-time Updates**: Live agent status and execution monitoring
+#### 前端 (React/TypeScript)
+- **UI 组件**：
+  - `CCAgents.tsx` - 主要代理管理界面
+  - `GitHubAgentBrowser.tsx` - GitHub 仓库浏览器
+  - `CreateAgent.tsx` - 代理创建/编辑表单
+- **文件操作**：用于导入/导出的原生文件对话框
+- **实时更新**：实时代理状态和执行监控
 
-### Key Features
+### 关键特性
 
-1. **Version Control**: Each agent export includes version metadata
-2. **Duplicate Prevention**: Automatic naming conflict resolution
-3. **Model Selection**: Choose between Opus, Sonnet, and Haiku models
-4. **GitHub Integration**: Direct import from the official repository
+1. **版本控制**：每个代理导出都包含版本元数据
+2. **防止重复**：自动命名冲突解决
+3. **模型选择**：在 Opus、Sonnet 和 Haiku 模型之间选择
+4. **GitHub 集成**：直接从官方仓库导入
 
-## 🤝 Contributing
+## 🤝 贡献
 
-We welcome agent contributions! Here's how to add your agent:
+我们欢迎代理贡献！以下是添加您的代理的方法：
 
-### 1. Create Your Agent
-Design and test your agent in Claudia with a clear, focused purpose.
+### 1. 创建您的代理
+在 Claudia 中设计和测试您的代理，使其具有明确、专注的目的。
 
-### 2. Export Your Agent
-Export your agent to a `.claudia.json` file with a descriptive name.
+### 2. 导出您的代理
+将您的代理导出为具有描述性名称的 `.claudia.json` 文件。
 
-### 3. Submit a Pull Request
-1. Fork this repository
-2. Add your `.claudia.json` file to the `cc_agents` directory
-3. Update this README with your agent's details
-4. Submit a PR with a description of what your agent does
+### 3. 提交 Pull Request
+1. Fork 此仓库
+2. 将您的 `.claudia.json` 文件添加到 `cc_agents` 目录
+3. 使用您的代理详情更新此 README
+4. 提交包含代理功能描述的 PR
 
-### Agent Guidelines
+### 代理指南
 
-- **Single Purpose**: Each agent should excel at one specific task
-- **Clear Documentation**: Write comprehensive system prompts
-- **Model Choice**: Use Haiku for simple tasks, Sonnet for general purpose, Opus for complex reasoning
-- **Naming**: Use descriptive names that clearly indicate the agent's function
+- **单一目的**：每个代理应该擅长一项特定任务
+- **清晰文档**：编写全面的系统提示
+- **模型选择**：简单任务使用 Haiku，通用任务使用 Sonnet，复杂推理使用 Opus
+- **命名**：使用清楚表明代理功能的描述性名称
 
-## 📜 License
+## 📜 许可证
 
-These agents are provided under the same license as the Claudia project. See the main LICENSE file for details.
+这些代理在与 Claudia 项目相同的许可证下提供。有关详细信息，请参阅主 LICENSE 文件。
 
 ---
 
 <div align="center">
-  <strong>Built with ❤️ by the Claudia community</strong>
-</div> 
+  <strong>由 Claudia 社区用 ❤️ 构建</strong>
+</div>

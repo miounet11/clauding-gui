@@ -38,5 +38,7 @@
     "keyInvalid": "API 密钥无效",
     "quotaExceeded": "配额已超限",
     "rateLimited": "请求过于频繁"
-  }
+  },
+  "failed_to_load_projects": "加载项目失败。请确保 ~/.claude 目录存在。",
+  "failed_to_load_sessions": "加载该项目的会话失败。"
 }

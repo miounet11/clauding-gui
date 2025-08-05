@@ -2,6 +2,58 @@
 
 所有重要的更改都将记录在此文件中。
 
+## [2.0.6] - 2025-08-05
+
+### 🎨 视觉更新
+
+#### 应用图标
+- **更换应用图标** - 使用全新的品牌图标
+  - ✅ 生成所有平台所需的图标尺寸
+  - ✅ macOS .icns 格式支持
+  - ✅ 多分辨率 PNG 图标 (32x32 到 512x512)
+
+### 🌐 国际化完善
+
+#### NFO 页面
+- **完全中文化** - NFO 致谢页面
+  - ✅ 版本信息更新为 "CLAUDING GUI v2.0.6"
+  - ✅ 添加项目 GitHub 链接
+  - ✅ "File a bug" → "报告问题"
+  - ✅ 所有标题和内容翻译为中文
+
+#### 设置页面
+- **修复硬编码文本** - 设置和分析同意对话框
+  - ✅ 设置页面所有英文标签
+  - ✅ 分析同意对话框文本
+  - ✅ 添加缺失的翻译键
+
+### 📚 文档更新
+- **中文化文档**
+  - ✅ CONTRIBUTING.md 贡献指南
+  - ✅ cc_agents/README.md 代理说明
+  - ✅ 页面标题更新
+
+## [2.0.5] - 2025-08-05
+
+### 🐛 Bug 修复
+
+#### Node 环境问题
+- **修复 "env: node: No such file or directory" 错误**
+  - ✅ 解决了应用启动时无法找到 node 的问题
+  - ✅ 更新了项目依赖
+
+#### 界面文本国际化
+- **修复硬编码英文文本** - 将主页面的英文改为中文
+  - ✅ "CC Projects" → "CC 项目"
+  - ✅ "Browse your Claude Code sessions" → "浏览您的 Claude Code 会话"
+  - ✅ "New Claude Code session" → "新建 Claude Code 会话"
+  - ✅ 错误消息本地化
+
+### 🌐 国际化改进
+- **完善中文翻译** - 添加缺失的翻译键
+  - ✅ projects.json：添加 title、subtitle、new_session、no_projects_found
+  - ✅ errors.json：添加 failed_to_load_projects、failed_to_load_sessions
+
 ## [2.0.4] - 2025-08-04
 
 ### 🔧 修复

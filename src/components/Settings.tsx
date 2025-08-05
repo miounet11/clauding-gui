@@ -569,19 +569,19 @@ export const Settings: React.FC<SettingsProps> = ({
                     
                     {/* Language Selection */}
                     <div className="space-y-2">
-                      <Label>Language</Label>
+                      <Label>{t('settings:language')}</Label>
                       <LanguageSelector className="w-full max-w-xs" showFlag={true} />
                       <p className="text-xs text-muted-foreground">
-                        Choose your preferred language for the interface
+                        {t('settings:language_description')}
                       </p>
                     </div>
                     
                     {/* Include Co-authored By */}
                     <div className="flex items-center justify-between">
                       <div className="space-y-0.5 flex-1">
-                        <Label htmlFor="coauthored">Include "Co-authored by Claude"</Label>
+                        <Label htmlFor="coauthored">{t('settings:include_coauthored')}</Label>
                         <p className="text-xs text-muted-foreground">
-                          Add Claude attribution to git commits and pull requests
+                          {t('settings:include_coauthored_description')}
                         </p>
                       </div>
                       <Switch
@@ -608,7 +608,7 @@ export const Settings: React.FC<SettingsProps> = ({
                     
                     {/* Cleanup Period */}
                     <div className="space-y-2">
-                      <Label htmlFor="cleanup">Chat Transcript Retention (days)</Label>
+                      <Label htmlFor="cleanup">{t('settings:transcript_retention')}</Label>
                       <Input
                         id="cleanup"
                         type="number"
@@ -621,16 +621,16 @@ export const Settings: React.FC<SettingsProps> = ({
                         }}
                       />
                       <p className="text-xs text-muted-foreground">
-                        How long to retain chat transcripts locally (default: 30 days)
+                        {t('settings:transcript_retention_description')}
                       </p>
                     </div>
                     
                     {/* Claude Binary Path Selector */}
                     <div className="space-y-4">
                       <div>
-                        <Label className="text-sm font-medium mb-2 block">Claude Code Installation</Label>
+                        <Label className="text-sm font-medium mb-2 block">{t('settings:claude_installation')}</Label>
                         <p className="text-xs text-muted-foreground mb-4">
-                          Select which Claude Code installation to use.
+                          {t('settings:claude_installation_description')}
                         </p>
                       </div>
                       <ClaudeVersionSelector
@@ -653,7 +653,7 @@ export const Settings: React.FC<SettingsProps> = ({
               <Card className="p-6">
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-base font-semibold mb-2">Permission Rules</h3>
+                    <h3 className="text-base font-semibold mb-2">{t('settings:permission_rules')}</h3>
                     <p className="text-sm text-muted-foreground mb-4">
                       Control which tools Claude Code can use without manual approval
                     </p>
@@ -775,7 +775,7 @@ export const Settings: React.FC<SettingsProps> = ({
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-base font-semibold">Environment Variables</h3>
+                      <h3 className="text-base font-semibold">{t('settings:environment_variables')}</h3>
                       <p className="text-sm text-muted-foreground mt-1">
                         Environment variables applied to every Claude Code session
                       </p>
@@ -832,7 +832,7 @@ export const Settings: React.FC<SettingsProps> = ({
                   
                   <div className="pt-2 space-y-2">
                     <p className="text-xs text-muted-foreground">
-                      <strong>Common variables:</strong>
+                      <strong>{t('settings:common_variables')}:</strong>
                     </p>
                     <ul className="text-xs text-muted-foreground space-y-1 ml-4">
                       <li>• <code className="px-1 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400">CLAUDE_CODE_ENABLE_TELEMETRY</code> - Enable/disable telemetry (0 or 1)</li>
@@ -848,15 +848,15 @@ export const Settings: React.FC<SettingsProps> = ({
               <Card className="p-6">
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-base font-semibold mb-4">Advanced Settings</h3>
+                    <h3 className="text-base font-semibold mb-4">{t('settings:advanced_settings')}</h3>
                     <p className="text-sm text-muted-foreground mb-6">
-                      Additional configuration options for advanced users
+                      {t('settings:advanced_settings_description')}
                     </p>
                   </div>
                   
                   {/* API Key Helper */}
                   <div className="space-y-2">
-                    <Label htmlFor="apiKeyHelper">API Key Helper Script</Label>
+                    <Label htmlFor="apiKeyHelper">{t('settings:api_key_helper_script')}</Label>
                     <Input
                       id="apiKeyHelper"
                       placeholder="/path/to/generate_api_key.sh"
@@ -864,18 +864,18 @@ export const Settings: React.FC<SettingsProps> = ({
                       onChange={(e) => updateSetting("apiKeyHelper", e.target.value || undefined)}
                     />
                     <p className="text-xs text-muted-foreground">
-                      Custom script to generate auth values for API requests
+                      {t('settings:api_key_helper_description')}
                     </p>
                   </div>
                   
                   {/* Raw JSON Editor */}
                   <div className="space-y-2">
-                    <Label>Raw Settings (JSON)</Label>
+                    <Label>{t('settings:raw_settings')}</Label>
                     <div className="p-3 rounded-md bg-muted font-mono text-xs overflow-x-auto whitespace-pre-wrap">
                       <pre>{JSON.stringify(settings, null, 2)}</pre>
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      This shows the raw JSON that will be saved to ~/.claude/settings.json
+                      {t('settings:raw_settings_description')}
                     </p>
                   </div>
                 </div>

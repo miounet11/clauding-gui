@@ -44,6 +44,7 @@
     },
     "deleteAnalyticsData": "删除所有分析数据",
     "language": "语言",
+    "language_description": "选择您偏好的界面语言",
     "theme": "主题",
     "darkMode": "深色模式",
     "lightMode": "浅色模式",
@@ -82,5 +83,24 @@
     "saveFailed": "保存失败",
     "resetConfirm": "确定要重置所有设置吗？",
     "resetSuccess": "设置已重置"
-  }
+  },
+  "include_coauthored": "包含 \"Co-authored by Claude\"",
+  "include_coauthored_description": "在 git 提交和拉取请求中添加 Claude 署名",
+  "transcript_retention": "聊天记录保留时间（天）",
+  "transcript_retention_description": "本地保留聊天记录的时长（默认：30 天）",
+  "claude_installation": "Claude Code 安装",
+  "claude_installation_description": "选择要使用的 Claude Code 安装。",
+  "permission_rules": "权限规则",
+  "environment_variables": "环境变量",
+  "common_variables": "常用变量",
+  "advanced_settings": "高级设置",
+  "advanced_settings_description": "面向高级用户的额外配置选项",
+  "api_key_helper_script": "API 密钥助手脚本",
+  "api_key_helper_description": "用于为 API 请求生成认证值的自定义脚本",
+  "raw_settings": "原始设置 (JSON)",
+  "raw_settings_description": "这显示了将保存到 ~/.claude/settings.json 的原始 JSON",
+  "analytics_consent_title": "帮助改进 Claudia",
+  "analytics_consent_description": "我们收集匿名使用数据以改善您的体验。不会收集任何个人数据。",
+  "no_thanks": "不用了，谢谢",
+  "allow": "允许"
 }

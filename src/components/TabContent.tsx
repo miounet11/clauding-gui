@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useTabState } from '@/hooks/useTabState';
 import { useScreenTracking } from '@/hooks/useAnalytics';
 import { Tab } from '@/contexts/TabContext';
@@ -29,6 +30,7 @@ interface TabPanelProps {
 }
 
 const TabPanel: React.FC<TabPanelProps> = ({ tab, isActive }) => {
+  const { t } = useTranslation(['projects', 'common']);
   const { updateTab, createChatTab } = useTabState();
   const [projects, setProjects] = React.useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = React.useState<Project | null>(null);
@@ -54,7 +56,7 @@ const TabPanel: React.FC<TabPanelProps> = ({ tab, isActive }) => {
       setProjects(projectList);
     } catch (err) {
       console.error("Failed to load projects:", err);
-      setError("Failed to load projects. Please ensure ~/.claude directory exists.");
+      setError(t('errors:failed_to_load_projects'));
     } finally {
       setLoading(false);
     }
@@ -69,7 +71,7 @@ const TabPanel: React.FC<TabPanelProps> = ({ tab, isActive }) => {
       setSelectedProject(project);
     } catch (err) {
       console.error("Failed to load sessions:", err);
-      setError("Failed to load sessions for this project.");
+      setError(t('errors:failed_to_load_sessions'));
     } finally {
       setLoading(false);
     }
@@ -96,9 +98,9 @@ const TabPanel: React.FC<TabPanelProps> = ({ tab, isActive }) => {
             <div className="container mx-auto p-6">
               {/* Header */}
               <div className="mb-6">
-                <h1 className="text-3xl font-bold tracking-tight">CC Projects</h1>
+                <h1 className="text-3xl font-bold tracking-tight">{t('projects:title')}</h1>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Browse your Claude Code sessions
+                  {t('projects:subtitle')}
                 </p>
               </div>
 
@@ -174,7 +176,7 @@ const TabPanel: React.FC<TabPanelProps> = ({ tab, isActive }) => {
                           className="w-full max-w-md"
                         >
                           <Plus className="mr-2 h-4 w-4" />
-                          New Claude Code session
+                          {t('projects:new_session')}
                         </Button>
                       </motion.div>
 
@@ -196,7 +198,7 @@ const TabPanel: React.FC<TabPanelProps> = ({ tab, isActive }) => {
                       ) : (
                         <div className="py-8 text-center">
                           <p className="text-sm text-muted-foreground">
-                            No projects found in ~/.claude/projects
+                            {t('projects:no_projects_found')}
                           </p>
                         </div>
                       )}
