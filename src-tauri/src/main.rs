@@ -5,6 +5,7 @@ mod checkpoint;
 mod claude_binary;
 mod commands;
 mod process;
+mod error_messages;
 
 use checkpoint::state::CheckpointState;
 use commands::agents::{

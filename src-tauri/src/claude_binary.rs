@@ -4,7 +4,11 @@ use serde::{Deserialize, Serialize};
 use std::cmp::Ordering;
 use std::path::PathBuf;
 use std::process::Command;
+use std::fs;
+use std::os::unix::fs::PermissionsExt;
 use tauri::Manager;
+use reqwest;
+use crate::error_messages;
 
 /// Type of Claude installation
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -13,6 +17,21 @@ pub enum InstallationType {
     System,
     /// Custom path specified by user
     Custom,
+    /// Bundled with application
+    Bundled,
+}
+
+/// Node.js runtime information
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct NodeRuntime {
+    /// Path to Node.js binary
+    pub path: String,
+    /// Version string if available
+    pub version: Option<String>,
+    /// Source of Node.js (system, bundled, downloaded)
+    pub source: String,
+    /// Whether this is a bundled runtime
+    pub is_bundled: bool,
 }
 
 /// Represents a Claude installation with metadata
@@ -30,6 +49,7 @@ pub struct ClaudeInstallation {
 
 /// Main function to find the Claude binary
 /// Checks database first for stored path and preference, then prioritizes accordingly
+/// Falls back to bundled Node.js runtime if system Node.js is not available
 pub fn find_claude_binary(app_handle: &tauri::AppHandle) -> Result<String, String> {
     info!("Searching for claude binary...");
 
@@ -71,8 +91,24 @@ pub fn find_claude_binary(app_handle: &tauri::AppHandle) -> Result<String, Strin
     let installations = discover_system_installations();
 
     if installations.is_empty() {
-        error!("Could not find claude binary in any location");
-        return Err("Claude Code not found. Please ensure it's installed in one of these locations: PATH, /usr/local/bin, /opt/homebrew/bin, ~/.nvm/versions/node/*/bin, ~/.claude/local, ~/.local/bin".to_string());
+        info!("No system Claude installations found, attempting to use bundled Node.js runtime");
+        
+        // Try to ensure Node.js runtime is available (system or bundled)
+        match ensure_node_runtime(app_handle) {
+            Ok(node_runtime) => {
+                info!("Node.js runtime available: {:?}", node_runtime);
+                // Try to use global Claude installation with bundled Node.js
+                if let Ok(claude_path) = find_global_claude_with_bundled_node(app_handle) {
+                    return Ok(claude_path);
+                }
+            }
+            Err(e) => {
+                warn!("Failed to ensure Node.js runtime: {}", e);
+            }
+        }
+        
+        error!("Could not find claude binary in any location and Node.js runtime unavailable");
+        return Err(error_messages::format_error_with_suggestion("Claude Code not found"));
     }
 
     // Log all found installations
@@ -572,4 +608,481 @@ pub fn create_command_with_env(program: &str) -> Command {
     }
 
     cmd
+}
+
+/// Ensure Node.js runtime is available - either system or bundled
+pub fn ensure_node_runtime(app_handle: &tauri::AppHandle) -> Result<NodeRuntime, String> {
+    info!("Ensuring Node.js runtime is available...");
+
+    // First try to find system Node.js
+    if let Ok(node_runtime) = find_system_node() {
+        info!("Found system Node.js: {:?}", node_runtime);
+        return Ok(node_runtime);
+    }
+
+    // If no system Node.js, try bundled version
+    if let Ok(node_runtime) = find_bundled_node(app_handle) {
+        info!("Found bundled Node.js: {:?}", node_runtime);
+        return Ok(node_runtime);
+    }
+
+    // Finally, try to download Node.js (sync version)
+    info!("No Node.js found, attempting to download...");
+    match download_and_install_node_sync(app_handle) {
+        Ok(node_runtime) => {
+            info!("Successfully downloaded and installed Node.js: {:?}", node_runtime);
+            Ok(node_runtime)
+        }
+        Err(e) => {
+            error!("Failed to download Node.js: {}", e);
+            Err(error_messages::format_error_with_suggestion(&format!("Failed to download Node.js: {}", e)))
+        }
+    }
+}
+
+/// Find system Node.js installation
+pub fn find_system_node() -> Result<NodeRuntime, String> {
+    debug!("Searching for system Node.js installation...");
+
+    // Try 'which node' first
+    if let Ok(output) = Command::new("which").arg("node").output() {
+        if output.status.success() {
+            let path = String::from_utf8_lossy(&output.stdout).trim().to_string();
+            if !path.is_empty() && PathBuf::from(&path).exists() {
+                let version = get_node_version(&path);
+                return Ok(NodeRuntime {
+                    path,
+                    version,
+                    source: "system".to_string(),
+                    is_bundled: false,
+                });
+            }
+        }
+    }
+
+    // Check common system paths
+    let common_paths = vec![
+        "/usr/bin/node",
+        "/usr/local/bin/node",
+        "/opt/homebrew/bin/node",
+        "/bin/node",
+    ];
+
+    for path in common_paths {
+        if PathBuf::from(path).exists() {
+            let version = get_node_version(path);
+            return Ok(NodeRuntime {
+                path: path.to_string(),
+                version,
+                source: "system".to_string(),
+                is_bundled: false,
+            });
+        }
+    }
+
+    // Check NVM installations
+    if let Ok(home) = std::env::var("HOME") {
+        let nvm_dir = PathBuf::from(&home).join(".nvm").join("versions").join("node");
+        
+        if let Ok(entries) = std::fs::read_dir(&nvm_dir) {
+            let mut versions: Vec<_> = entries.filter_map(|e| e.ok()).collect();
+            
+            // Sort by version (newest first)
+            versions.sort_by(|a, b| {
+                let version_a = a.file_name().to_string_lossy().to_string();
+                let version_b = b.file_name().to_string_lossy().to_string();
+                version_b.cmp(&version_a)
+            });
+
+            for entry in versions {
+                if entry.file_type().map(|t| t.is_dir()).unwrap_or(false) {
+                    let node_path = entry.path().join("bin").join("node");
+                    if node_path.exists() {
+                        let path_str = node_path.to_string_lossy().to_string();
+                        let version = get_node_version(&path_str);
+                        return Ok(NodeRuntime {
+                            path: path_str,
+                            version,
+                            source: format!("nvm ({})", entry.file_name().to_string_lossy()),
+                            is_bundled: false,
+                        });
+                    }
+                }
+            }
+        }
+    }
+
+    Err(error_messages::get_chinese_error_message("No system Node.js installation found"))
+}
+
+/// Find bundled Node.js runtime
+pub fn find_bundled_node(app_handle: &tauri::AppHandle) -> Result<NodeRuntime, String> {
+    debug!("Searching for bundled Node.js runtime...");
+
+    let app_data_dir = app_handle.path().app_data_dir()
+        .map_err(|e| format!("Failed to get app data directory: {}", e))?;
+    
+    let bundled_node_dir = app_data_dir.join("bundled_runtime");
+    let node_binary = if cfg!(target_os = "windows") {
+        bundled_node_dir.join("node.exe")
+    } else {
+        bundled_node_dir.join("node")
+    };
+
+    if node_binary.exists() && node_binary.is_file() {
+        let path_str = node_binary.to_string_lossy().to_string();
+        let version = get_node_version(&path_str);
+        
+        Ok(NodeRuntime {
+            path: path_str,
+            version,
+            source: "bundled".to_string(),
+            is_bundled: true,
+        })
+    } else {
+        Err("No bundled Node.js runtime found".to_string())
+    }
+}
+
+/// Get Node.js version
+fn get_node_version(path: &str) -> Option<String> {
+    match Command::new(path).arg("--version").output() {
+        Ok(output) if output.status.success() => {
+            let version_str = String::from_utf8_lossy(&output.stdout).trim().to_string();
+            // Remove 'v' prefix if present (e.g., "v20.11.0" -> "20.11.0")
+            Some(version_str.strip_prefix('v').unwrap_or(&version_str).to_string())
+        }
+        _ => None,
+    }
+}
+
+/// Download and install Node.js runtime (sync version)
+pub fn download_and_install_node_sync(app_handle: &tauri::AppHandle) -> Result<NodeRuntime, String> {
+    // Block on async version
+    tokio::task::block_in_place(|| {
+        tokio::runtime::Handle::current().block_on(async {
+            download_and_install_node(app_handle).await
+        })
+    })
+}
+
+/// Download and install Node.js runtime
+pub async fn download_and_install_node(app_handle: &tauri::AppHandle) -> Result<NodeRuntime, String> {
+    info!("Downloading Node.js runtime...");
+
+    let app_data_dir = app_handle.path().app_data_dir()
+        .map_err(|e| format!("Failed to get app data directory: {}", e))?;
+    
+    let bundled_dir = app_data_dir.join("bundled_runtime");
+    
+    // Create directory if it doesn't exist
+    fs::create_dir_all(&bundled_dir)
+        .map_err(|e| format!("Failed to create bundled runtime directory: {}", e))?;
+
+    // Determine download URL based on platform and architecture
+    let (download_url, node_binary_name) = get_node_download_info()?;
+    
+    info!("Downloading Node.js from: {}", download_url);
+    
+    // Download the file
+    let response = reqwest::get(&download_url).await
+        .map_err(|e| format!("Failed to download Node.js: {}", e))?;
+    
+    if !response.status().is_success() {
+        return Err(format!("Failed to download Node.js: HTTP {}", response.status()));
+    }
+
+    let content = response.bytes().await
+        .map_err(|e| format!("Failed to read Node.js download: {}", e))?;
+
+    // Extract and install based on file type
+    if download_url.ends_with(".tar.xz") || download_url.ends_with(".tar.gz") {
+        extract_and_install_node_archive(&content, &bundled_dir, &node_binary_name)?;
+    } else if download_url.ends_with(".zip") {
+        extract_and_install_node_zip(&content, &bundled_dir, &node_binary_name)?;
+    } else {
+        return Err("Unsupported Node.js download format".to_string());
+    }
+
+    let node_path = bundled_dir.join(&node_binary_name);
+    let path_str = node_path.to_string_lossy().to_string();
+    let version = get_node_version(&path_str);
+
+    info!("Successfully installed bundled Node.js at: {}", path_str);
+
+    Ok(NodeRuntime {
+        path: path_str,
+        version,
+        source: "downloaded".to_string(),
+        is_bundled: true,
+    })
+}
+
+/// Get Node.js download URL and binary name for current platform
+fn get_node_download_info() -> Result<(String, String), String> {
+    let version = "v20.11.0"; // LTS version
+    let base_url = "https://nodejs.org/dist";
+    
+    #[cfg(target_os = "macos")]
+    {
+        #[cfg(target_arch = "x86_64")]
+        {
+            Ok((
+                format!("{}/{}/node-{}-darwin-x64.tar.xz", base_url, version, version),
+                "node".to_string()
+            ))
+        }
+        #[cfg(target_arch = "aarch64")]
+        {
+            Ok((
+                format!("{}/{}/node-{}-darwin-arm64.tar.xz", base_url, version, version),
+                "node".to_string()
+            ))
+        }
+    }
+    
+    #[cfg(target_os = "linux")]
+    {
+        #[cfg(target_arch = "x86_64")]
+        {
+            Ok((
+                format!("{}/{}/node-{}-linux-x64.tar.xz", base_url, version, version),
+                "node".to_string()
+            ))
+        }
+        #[cfg(target_arch = "aarch64")]
+        {
+            Ok((
+                format!("{}/{}/node-{}-linux-arm64.tar.xz", base_url, version, version),
+                "node".to_string()
+            ))
+        }
+    }
+    
+    #[cfg(target_os = "windows")]
+    {
+        #[cfg(target_arch = "x86_64")]
+        {
+            Ok((
+                format!("{}/{}/node-{}-win-x64.zip", base_url, version, version),
+                "node.exe".to_string()
+            ))
+        }
+    }
+    
+    #[cfg(not(any(target_os = "macos", target_os = "linux", target_os = "windows")))]
+    {
+        Err("Unsupported platform for Node.js download".to_string())
+    }
+}
+
+/// Extract Node.js archive (tar.xz/tar.gz) and install binary
+fn extract_and_install_node_archive(
+    content: &[u8], 
+    bundled_dir: &PathBuf, 
+    node_binary_name: &str
+) -> Result<(), String> {
+    use std::io::Cursor;
+    use xz2::read::XzDecoder;
+    use flate2::read::GzDecoder;
+    use tar::Archive;
+    
+    info!("Extracting Node.js archive...");
+    
+    // Create a temporary directory for extraction
+    let temp_dir = std::env::temp_dir().join("node_extract");
+    fs::create_dir_all(&temp_dir)
+        .map_err(|e| format!("Failed to create temp directory: {}", e))?;
+
+    // Determine compression type and create appropriate decoder
+    let cursor = Cursor::new(content);
+    
+    // Try XZ decompression first (most common for Node.js)
+    // XzDecoder::new doesn't return a Result, so we try to decompress directly
+    let extract_result = {
+        let decoder = XzDecoder::new(cursor.clone());
+        let mut archive = Archive::new(decoder);
+        match archive.unpack(&temp_dir) {
+            Ok(_) => Ok(()),
+            Err(_) => {
+                // Fall back to GZ decompression
+                let decoder = GzDecoder::new(cursor);
+                let mut archive = Archive::new(decoder);
+                archive.unpack(&temp_dir)
+            }
+        }
+    };
+
+    match extract_result {
+        Ok(()) => {
+            // Find the extracted node binary
+            let extracted_dirs: Vec<_> = fs::read_dir(&temp_dir)
+                .map_err(|e| format!("Failed to read temp directory: {}", e))?
+                .filter_map(|entry| entry.ok())
+                .filter(|entry| entry.file_type().map(|t| t.is_dir()).unwrap_or(false))
+                .collect();
+
+            for dir_entry in extracted_dirs {
+                let node_bin_path = dir_entry.path().join("bin").join(node_binary_name);
+                if node_bin_path.exists() {
+                    let dest_path = bundled_dir.join(node_binary_name);
+                    fs::copy(&node_bin_path, &dest_path)
+                        .map_err(|e| format!("Failed to copy node binary: {}", e))?;
+                    
+                    // Make executable on Unix systems
+                    #[cfg(unix)]
+                    {
+                        let metadata = fs::metadata(&dest_path)
+                            .map_err(|e| format!("Failed to get file metadata: {}", e))?;
+                        let mut perms = metadata.permissions();
+                        perms.set_mode(0o755);
+                        fs::set_permissions(&dest_path, perms)
+                            .map_err(|e| format!("Failed to set executable permissions: {}", e))?;
+                    }
+                    
+                    info!("Node.js binary installed successfully");
+                    
+                    // Clean up temp files
+                    let _ = fs::remove_dir_all(&temp_dir);
+                    return Ok(());
+                }
+            }
+            
+            Err("Node.js binary not found in extracted archive".to_string())
+        }
+        Err(e) => {
+            // Clean up temp files
+            let _ = fs::remove_dir_all(&temp_dir);
+            Err(format!("Failed to extract Node.js archive: {}", e))
+        }
+    }
+}
+
+/// Extract Node.js zip archive (Windows) and install binary
+fn extract_and_install_node_zip(
+    content: &[u8], 
+    bundled_dir: &PathBuf, 
+    node_binary_name: &str
+) -> Result<(), String> {
+    use std::io::Cursor;
+    use zip::read::ZipArchive;
+    
+    info!("Extracting Node.js zip archive...");
+    
+    let cursor = Cursor::new(content);
+    let mut archive = ZipArchive::new(cursor)
+        .map_err(|e| format!("Failed to read zip archive: {}", e))?;
+
+    // Create a temporary directory for extraction
+    let temp_dir = std::env::temp_dir().join("node_extract");
+    fs::create_dir_all(&temp_dir)
+        .map_err(|e| format!("Failed to create temp directory: {}", e))?;
+
+    // Extract all files
+    for i in 0..archive.len() {
+        let mut file = archive.by_index(i)
+            .map_err(|e| format!("Failed to access zip entry {}: {}", i, e))?;
+        
+        let file_path = temp_dir.join(file.name());
+        
+        if file.is_dir() {
+            fs::create_dir_all(&file_path)
+                .map_err(|e| format!("Failed to create directory {}: {}", file_path.display(), e))?;
+        } else {
+            if let Some(parent) = file_path.parent() {
+                fs::create_dir_all(parent)
+                    .map_err(|e| format!("Failed to create parent directory for {}: {}", file_path.display(), e))?;
+            }
+            
+            let mut extracted_file = fs::File::create(&file_path)
+                .map_err(|e| format!("Failed to create file {}: {}", file_path.display(), e))?;
+            
+            std::io::copy(&mut file, &mut extracted_file)
+                .map_err(|e| format!("Failed to extract file {}: {}", file_path.display(), e))?;
+        }
+    }
+
+    // Find the extracted node binary
+    let extracted_dirs: Vec<_> = fs::read_dir(&temp_dir)
+        .map_err(|e| format!("Failed to read temp directory: {}", e))?
+        .filter_map(|entry| entry.ok())
+        .filter(|entry| entry.file_type().map(|t| t.is_dir()).unwrap_or(false))
+        .collect();
+
+    for dir_entry in extracted_dirs {
+        let node_bin_path = dir_entry.path().join(node_binary_name);
+        if node_bin_path.exists() {
+            let dest_path = bundled_dir.join(node_binary_name);
+            fs::copy(&node_bin_path, &dest_path)
+                .map_err(|e| format!("Failed to copy node binary: {}", e))?;
+            
+            info!("Node.js binary installed successfully");
+            
+            // Clean up temp files
+            let _ = fs::remove_dir_all(&temp_dir);
+            return Ok(());
+        }
+    }
+    
+    // Clean up temp files
+    let _ = fs::remove_dir_all(&temp_dir);
+    Err("Node.js binary not found in extracted zip archive".to_string())
+}
+
+/// Try to find a global Claude installation and configure it to use bundled Node.js
+pub fn find_global_claude_with_bundled_node(app_handle: &tauri::AppHandle) -> Result<String, String> {
+    info!("Attempting to find global Claude installation to use with bundled Node.js...");
+    
+    // Try global npm installation paths
+    if let Ok(home) = std::env::var("HOME") {
+        let potential_paths = vec![
+            format!("{}/.npm-global/bin/claude", home),
+            format!("{}/.yarn/bin/claude", home),
+            format!("{}/.local/bin/claude", home),
+            "/usr/local/bin/claude".to_string(),
+            "/opt/homebrew/bin/claude".to_string(),
+        ];
+        
+        for path in potential_paths {
+            if PathBuf::from(&path).exists() {
+                info!("Found potential Claude installation at: {}", path);
+                return Ok(path);
+            }
+        }
+    }
+    
+    Err("No global Claude installation found to pair with bundled Node.js".to_string())
+}
+
+/// Enhanced command creation that prefers bundled Node.js runtime
+pub fn create_command_with_bundled_env(program: &str, app_handle: &tauri::AppHandle) -> Command {
+    let mut cmd = create_command_with_env(program);
+    
+    // Try to use bundled Node.js if available
+    if let Ok(node_runtime) = ensure_node_runtime(app_handle) {
+        if node_runtime.is_bundled {
+            // Add bundled Node.js directory to PATH
+            if let Some(node_dir) = std::path::Path::new(&node_runtime.path).parent() {
+                let current_path = cmd.get_envs()
+                    .find(|(k, _)| k == &std::ffi::OsStr::new("PATH"))
+                    .and_then(|(_, v)| v)
+                    .and_then(|v| v.to_str())
+                    .map(|s| s.to_string())
+                    .unwrap_or_else(|| std::env::var("PATH").unwrap_or_default());
+                
+                let node_dir_str = node_dir.to_string_lossy();
+                let new_path = format!("{}:{}", node_dir_str, current_path);
+                cmd.env("PATH", new_path);
+                
+                info!("Using bundled Node.js runtime: {}", node_runtime.path);
+            }
+        }
+    }
+    
+    cmd
+}
+
+/// Synchronous version of ensure_node_runtime for use in non-async contexts
+pub fn ensure_node_runtime_sync(app_handle: &tauri::AppHandle) -> Result<NodeRuntime, String> {
+    ensure_node_runtime(app_handle)
 }
