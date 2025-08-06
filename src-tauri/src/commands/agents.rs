@@ -1836,14 +1836,12 @@ pub async fn list_claude_installations(
 /// Helper function to create a tokio Command with proper environment variables
 /// This ensures commands like Claude can find Node.js and other dependencies
 fn create_command_with_env(program: &str) -> Command {
-    // Convert std::process::Command to tokio::process::Command
-    let _std_cmd = crate::claude_binary::create_command_with_env(program);
-
+    use std::path::PathBuf;
+    
     // Create a new tokio Command from the program path
     let mut tokio_cmd = Command::new(program);
 
-    // Copy over all environment variables from the std::process::Command
-    // This is a workaround since we can't directly convert between the two types
+    // Copy over all essential environment variables
     for (key, value) in std::env::vars() {
         if key == "PATH"
             || key == "HOME"
@@ -1857,36 +1855,85 @@ fn create_command_with_env(program: &str) -> Command {
             || key == "NVM_BIN"
             || key == "HOMEBREW_PREFIX"
             || key == "HOMEBREW_CELLAR"
+            || key == "HTTP_PROXY"
+            || key == "HTTPS_PROXY"
+            || key == "NO_PROXY"
+            || key == "ALL_PROXY"
         {
             tokio_cmd.env(&key, &value);
         }
     }
 
-    // Add NVM support if the program is in an NVM directory
+    // Enhance PATH with common Node.js installation directories
+    let mut enhanced_path = std::env::var("PATH").unwrap_or_default();
+    let mut paths_to_add = Vec::new();
+    
+    // Check common Node.js installation paths - /opt/homebrew/bin MUST be first
+    let mut potential_node_paths = vec![
+        "/opt/homebrew/bin".to_string(), // Homebrew on M1 Macs - MUST BE FIRST for node
+        "/usr/local/bin".to_string(),
+        "/usr/bin".to_string(),
+        "/bin".to_string(),
+    ];
+    
+    if let Ok(home) = std::env::var("HOME") {
+        // Check for NVM installations
+        let nvm_dir = PathBuf::from(&home).join(".nvm").join("versions").join("node");
+        if nvm_dir.exists() {
+            if let Ok(entries) = std::fs::read_dir(&nvm_dir) {
+                for entry in entries.flatten() {
+                    if entry.file_type().map(|t| t.is_dir()).unwrap_or(false) {
+                        let node_bin = entry.path().join("bin");
+                        if node_bin.exists() {
+                            potential_node_paths.insert(0, node_bin.to_string_lossy().to_string());
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Add other common paths
+        potential_node_paths.extend(vec![
+            format!("{}/.npm-global/bin", home),
+            format!("{}/.yarn/bin", home),
+            format!("{}/.bun/bin", home),
+            format!("{}/.local/bin", home),
+            format!("{}/bin", home),
+        ]);
+    }
+    
+    // Add paths that exist and aren't already in PATH
+    for path in potential_node_paths {
+        if PathBuf::from(&path).exists() && !enhanced_path.contains(&path) {
+            paths_to_add.push(path);
+        }
+    }
+    
+    // Build the enhanced PATH - new paths go FIRST
+    if !paths_to_add.is_empty() {
+        let additional_paths = paths_to_add.join(":");
+        enhanced_path = format!("{}:{}", additional_paths, enhanced_path);
+    } else {
+        // Ensure /opt/homebrew/bin is in PATH even if it doesn't exist yet
+        if !enhanced_path.contains("/opt/homebrew/bin") {
+            enhanced_path = format!("/opt/homebrew/bin:{}", enhanced_path);
+        }
+    }
+    
+    // Add NVM support if the program itself is in an NVM directory
     if program.contains("/.nvm/versions/node/") {
         if let Some(node_bin_dir) = std::path::Path::new(program).parent() {
-            let current_path = std::env::var("PATH").unwrap_or_default();
             let node_bin_str = node_bin_dir.to_string_lossy();
-            if !current_path.contains(&node_bin_str.as_ref()) {
-                let new_path = format!("{}:{}", node_bin_str, current_path);
-                tokio_cmd.env("PATH", new_path);
+            
+            // Use the enhanced_path we already built
+            if !enhanced_path.contains(&node_bin_str.as_ref()) {
+                enhanced_path = format!("{}:{}", node_bin_str, enhanced_path);
             }
         }
     }
-
-    // Ensure PATH contains common Homebrew locations
-    if let Ok(existing_path) = std::env::var("PATH") {
-        let mut paths: Vec<&str> = existing_path.split(':').collect();
-        for p in ["/opt/homebrew/bin", "/usr/local/bin", "/usr/bin", "/bin"].iter() {
-            if !paths.contains(p) {
-                paths.push(p);
-            }
-        }
-        let joined = paths.join(":");
-        tokio_cmd.env("PATH", joined);
-    } else {
-        tokio_cmd.env("PATH", "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin");
-    }
+    
+    // Always set the enhanced PATH
+    tokio_cmd.env("PATH", enhanced_path);
 
     tokio_cmd
 }

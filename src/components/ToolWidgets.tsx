@@ -52,7 +52,6 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { getClaudeSyntaxTheme } from "@/lib/claudeSyntaxTheme";
-import { useTheme } from "@/hooks";
 import { Button } from "@/components/ui/button";
 import { createPortal } from "react-dom";
 import * as Diff from 'diff';
@@ -401,8 +400,7 @@ export const ReadWidget: React.FC<{ filePath: string; result?: any }> = ({ fileP
  */
 export const ReadResultWidget: React.FC<{ content: string; filePath?: string }> = ({ content, filePath }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const { theme } = useTheme();
-  const syntaxTheme = getClaudeSyntaxTheme(theme);
+  const syntaxTheme = getClaudeSyntaxTheme();
   
   // Extract file extension for syntax highlighting
   const getLanguage = (path?: string) => {
@@ -698,8 +696,7 @@ export const BashWidget: React.FC<{
  */
 export const WriteWidget: React.FC<{ filePath: string; content: string; result?: any }> = ({ filePath, content, result: _result }) => {
   const [isMaximized, setIsMaximized] = useState(false);
-  const { theme } = useTheme();
-  const syntaxTheme = getClaudeSyntaxTheme(theme);
+  const syntaxTheme = getClaudeSyntaxTheme();
   
   // Extract file extension for syntax highlighting
   const getLanguage = (path: string) => {
@@ -1126,8 +1123,7 @@ export const EditWidget: React.FC<{
   new_string: string;
   result?: any;
 }> = ({ file_path, old_string, new_string, result: _result }) => {
-  const { theme } = useTheme();
-  const syntaxTheme = getClaudeSyntaxTheme(theme);
+  const syntaxTheme = getClaudeSyntaxTheme();
 
   const diffResult = Diff.diffLines(old_string || '', new_string || '', { 
     newlineIsToken: true,
@@ -1203,8 +1199,7 @@ export const EditWidget: React.FC<{
  * Widget for Edit tool result - shows a diff view
  */
 export const EditResultWidget: React.FC<{ content: string }> = ({ content }) => {
-  const { theme } = useTheme();
-  const syntaxTheme = getClaudeSyntaxTheme(theme);
+  const syntaxTheme = getClaudeSyntaxTheme();
   
   // Parse the content to extract file path and code snippet
   const lines = content.split('\n');
@@ -1292,8 +1287,7 @@ export const MCPWidget: React.FC<{
   result?: any;
 }> = ({ toolName, input, result: _result }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const { theme } = useTheme();
-  const syntaxTheme = getClaudeSyntaxTheme(theme);
+  const syntaxTheme = getClaudeSyntaxTheme();
   
   // Parse the tool name to extract components
   // Format: mcp__namespace__method
@@ -1597,8 +1591,7 @@ export const MultiEditWidget: React.FC<{
 }> = ({ file_path, edits, result: _result }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const language = getLanguage(file_path);
-  const { theme } = useTheme();
-  const syntaxTheme = getClaudeSyntaxTheme(theme);
+  const syntaxTheme = getClaudeSyntaxTheme();
   
   return (
     <div className="space-y-2">

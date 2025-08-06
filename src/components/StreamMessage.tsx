@@ -12,7 +12,6 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { getClaudeSyntaxTheme } from "@/lib/claudeSyntaxTheme";
-import { useTheme } from "@/hooks";
 import type { ClaudeStreamMessage } from "./AgentExecution";
 import {
   TodoWidget,
@@ -55,9 +54,8 @@ const StreamMessageComponent: React.FC<StreamMessageProps> = ({ message, classNa
   // State to track tool results mapped by tool call ID
   const [toolResults, setToolResults] = useState<Map<string, any>>(new Map());
   
-  // Get current theme
-  const { theme } = useTheme();
-  const syntaxTheme = getClaudeSyntaxTheme(theme);
+  // Get syntax theme
+  const syntaxTheme = getClaudeSyntaxTheme();
   
   // Extract all tool results from stream messages
   useEffect(() => {
